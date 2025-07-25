@@ -1,0 +1,103 @@
+# strategy_config.yaml – Master Configuration
+
+strategy:
+  # === Toggles: Turn indicators/filters ON or OFF ===
+  use_ema_crossover: true
+  use_macd: true
+  use_vwap: true
+  use_rsi_filter: false
+  use_htf_trend: true
+  use_bollinger_bands: false
+  use_stochastic: false
+  use_ma: false
+  use_atr: true
+  use_volume_ma: false
+
+  # === EMA (Exponential Moving Average) Crossover ===
+  fast_ema: 9
+  slow_ema: 21
+  ema_points_threshold: 2   # Minimum points gap between EMAs to confirm cross
+
+  # === MACD Parameters ===
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+
+  # === VWAP Parameters ===
+  vwap_reset_each_day: true
+
+  # === RSI (Relative Strength Index) Parameters ===
+  rsi_length: 14
+  rsi_overbought: 70
+  rsi_oversold: 30
+
+  # === HTF (Higher Timeframe Trend) ===
+  htf_period: 20
+
+  # === Bollinger Bands ===
+  bb_period: 20
+  bb_std: 2
+
+  # === Stochastic Oscillator ===
+  stoch_k: 14
+  stoch_d: 3
+  stoch_overbought: 80
+  stoch_oversold: 20
+
+  # === Simple Moving Average (SMA) ===
+  ma_short: 20
+  ma_long: 50
+
+  # === ATR (Average True Range) ===
+  atr_len: 10
+  atr_mult: 3.0
+
+  # === Volume MA Parameters ===
+  volume_ma_period: 20
+  volume_multiplier: 1.5
+
+risk:
+  base_sl_points: 15
+  use_trail_stop: true
+  trail_activation_points: 25    # Points gain before trail SL activates
+  trail_distance_points: 10      # Distance of trail SL from max price
+
+  # === Tiered Take Profits ===
+  tp_points: [10, 25, 50, 100]
+  tp_percents: [0.25, 0.25, 0.25, 0.25]
+
+  risk_per_trade_percent: 1.0    # % of total capital risked per trade
+  commission_percent: 0.1        # Commission as percentage per trade
+  commission_per_trade: 0.0      # Minimum per-trade commission
+  buy_buffer: 0                  # Optional points buffer for entry slippage
+
+capital:
+  initial_capital: 100000
+
+session:
+  is_intraday: true
+  intraday_start_hour: 9
+  intraday_start_min: 15
+  intraday_end_hour: 15
+  intraday_end_min: 15
+  exit_before_close: 20
+  timezone: Asia/Kolkata
+
+reentry:
+  reentry_price_buffer: 5
+  reentry_momentum_lookback: 3
+  reentry_min_green_candles: 1
+
+backtest:
+  max_drawdown_pct: 0           # 0 disables early stop
+  allow_short: false            # Enforce long-only
+  close_at_session_end: true
+  save_results: true
+  results_dir: backtest_results
+  log_level: INFO
+
+live:
+  exchange_type: NSE_FO
+  feed_type: Quote
+  log_ticks: false
+  visual_indicator: true

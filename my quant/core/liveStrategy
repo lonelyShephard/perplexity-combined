@@ -1,0 +1,157 @@
+"""
+core/strategy.py - Unified Long-Only, Intraday Strategy for Trading Bot and Backtest
+
+- F&O-ready, multi-indicator, live-driven.
+- No shorting, no overnight risk, all config/param driven.
+- Handles all signal, entry, exit, and session rules.
+"""
+
+import pandas as pd
+from typing import Dict, Any, Optional
+from datetime import datetime, time, timedelta
+
+class ModularIntradayStrategy:
+    def __init__(self, params: Dict[str, Any], indicators_module):
+        self.params = params
+        self.indicators = indicators_module
+        self.in_position = False
+        self.position_id = None
+        self.position_entry_time = None
+        self.position_entry_price = None
+        self.last_signal_time = None
+        # For metering daily trade count and other constraints
+        self.daily_trade_count = 0
+
+        # Session/session exit config
+        session = params.get('session', {})
+        self.intraday_start = time(session.get('intraday_start_hour', 9), session.get('intraday_start_min', 15))
+        self.intraday_end = time(session.get('intraday_end_hour', 15), session.get('intraday_end_min', 15))
+        self.exit_before_close = session.get('exit_before_close', 20)
+        self.max_trades_per_day = params.get('max_trades_per_day', 10)
+
+    def is_session_live(self, current_time: datetime) -> bool:
+        t = current_time.time()
+        return self.intraday_start <= t <= self.intraday_end
+
+    def should_exit_for_session(self, now: datetime) -> bool:
+        """True if we're within N minutes of session close, and must flatten."""
+        session_end_dt = datetime.combine(now.date(), self.intraday_end)
+        return now >= (session_end_dt - timedelta(minutes=self.exit_before_close))
+
+    def indicators_and_signals(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Calculate all active indicators using the correct module (live or backtest-safe)."""
+        return self.indicators.calculate_all_indicators(data, self.params)
+
+    def entry_signal(self, row: pd.Series) -> bool:
+        # --- EMA CROSS ---
+        pass_ema = True
+        if self.params.get('use_ema_crossover', False):
+            pass_ema = (
+                row.get('fast_ema', None) is not None and
+                row.get('slow_ema', None) is not None and
+                row['fast_ema'] > row['slow_ema'] + self.params.get('ema_points_threshold', 0)
+            )
+        # --- VWAP ---
+        pass_vwap = True
+        if self.params.get('use_vwap', False):
+            vwap_val = row.get('vwap', None)
+            pass_vwap = (vwap_val is not None) and (row['close'] > vwap_val)
+        # --- MACD ---
+        pass_macd = True
+        if self.params.get('use_macd', False):
+            pass_macd = row.get('macd_bullish', False) and row.get('macd_histogram_positive', False)
+        # --- HTF TREND ---
+        pass_htf = True
+        if self.params.get('use_htf_trend', False):
+            htf_val = row.get('htf_ema', None)
+            pass_htf = (htf_val is not None) and (row['close'] > htf_val)
+        # --- RSI ---
+        pass_rsi = True
+        if self.params.get('use_rsi_filter', False):
+            rsi_val = row.get('rsi', None)
+            pass_rsi = (rsi_val is not None) and (self.params.get('rsi_oversold', 30) < rsi_val < self.params.get('rsi_overbought', 70))
+        # --- Bollinger Bands ---
+        pass_bb = True
+        if self.params.get('use_bollinger_bands', False):
+            bb_lower = row.get('bb_lower', None)
+            bb_upper = row.get('bb_upper', None)
+            pass_bb = (bb_lower is not None and bb_upper is not None) and (bb_lower < row['close'] < bb_upper)
+        # --- Construct final pass signal (all enabled must be True) ---
+        logic_checks = [pass_ema, pass_vwap, pass_macd, pass_htf, pass_rsi, pass_bb]
+        return all(logic_checks)
+
+    def can_open_long(self, row: pd.Series, now: datetime) -> bool:
+        # Only for live session, long-only; never more than max_trades_per_day.
+        if not self.is_session_live(now):
+            return False
+        if self.daily_trade_count >= self.max_trades_per_day:
+            return False
+        if self.in_position:
+            return False
+        if not self.entry_signal(row):
+            return False
+        if self.should_exit_for_session(now):
+            return False
+        return True
+
+    def open_long(self, row: pd.Series, now: datetime, position_manager) -> Optional[str]:
+        # For robust trade management, always use live/production-driven position config
+        price = row['close']
+        symbol = self.params.get('symbol', 'N/A')
+        # lot size and tick size must be passed from config (for F&O)
+        lot_size = self.params.get('lot_size', 1)
+        tick_size = self.params.get('tick_size', 0.05)
+        pos_id = position_manager.open_position(
+            symbol, price, now, lot_size=lot_size, tick_size=tick_size
+        )
+        if pos_id:
+            self.in_position = True
+            self.position_id = pos_id
+            self.position_entry_time = now
+            self.position_entry_price = price
+            self.daily_trade_count += 1
+            self.last_signal_time = now
+            return pos_id
+        return None
+
+    def should_close(self, row: pd.Series, now: datetime, position_manager) -> bool:
+        # Always flatten before session end, or let position manager enforce stops/TP/trail
+        return self.should_exit_for_session(now)
+
+    def handle_exit(self, position_id: str, price: float, now: datetime, position_manager, reason="Session End"):
+        if not position_id:
+            return
+        position_manager.close_position_full(position_id, price, now, reason=reason)
+        self.in_position = False
+        self.position_id = None
+        self.position_entry_time = None
+        self.position_entry_price = None
+
+    def reset_daily_counters(self, now: datetime):
+        # Should be called at new session start
+        self.daily_trade_count = 0
+        self.last_signal_time = None
+
+    def validate_parameters(self) -> list:
+        errors = []
+        # Typical validation rules
+        if self.params.get('use_ema_crossover', False):
+            if self.params['fast_ema'] >= self.params['slow_ema']:
+                errors.append("fast_ema must be less than slow_ema")
+        if self.params.get('use_htf_trend', False):
+            if self.params['htf_period'] <= 0:
+                errors.append("htf_period must be positive")
+        return errors
+
+if __name__ == "__main__":
+    # Minimal smoke test for development
+    test_params = {
+        'use_ema_crossover': True, 'fast_ema': 9, 'slow_ema': 21, 'ema_points_threshold': 2,
+        'use_macd': True, 'macd_fast': 12, 'macd_slow': 26, 'macd_signal': 9,
+        'use_vwap': True, 'use_htf_trend': True, 'htf_period': 20, 'symbol': 'NIFTY24DECFUT', 'lot_size': 15, 'tick_size': 0.05,
+        'session': {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 15, 'exit_before_close': 20},
+        'max_trades_per_day': 10
+    }
+    import core.indicators as indicators
+    strat = ModularIntradayStrategy(test_params, indicators)
+    print("Parameter validation errors:", strat.validate_parameters())

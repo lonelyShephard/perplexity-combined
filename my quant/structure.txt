@@ -1,0 +1,36 @@
+myquant/
+  config/
+    strategy_config.yaml       # Master config for all modes and parameters
+
+  core/
+    indicators.py              # All technical indicators, used by all modes
+    position_manager.py        # Single universal position manager (simulated trades)
+    strategy.py                # Unified strategy (research or live variants)
+
+  data/
+    ...                       # Historical CSV or live tick data cache
+
+  backtest/
+    backtest_runner.py         # CLI backtest engine, calls core modules
+    results.py                 # Backtest results summary and analytics
+
+  live/
+    trader.py                  # Live forward testing runner (simulated trades only)
+    broker_adapter.py          # Broker wrapper (SmartAPI), live stream + simulation
+    websocket_stream.py        # SmartAPI websocket streaming wrapper (integrated here)
+    login.py                   # SmartAPI login/token management (for streaming auth)
+
+  gui/
+    unified_gui.py             # Single GUI controlling backtest/forward test modes
+    parameter_gui.py           # Backtest parameters tab (copied/refined from old GUI)
+    live_trader_launcher.py    # Forward testing GUI tab with streaming controls
+    visual_price_tick_indicator.py  # Optional live tick visualizer GUI
+
+  utils/
+    logging_utils.py           # Centralized logging configuration/utilities
+    time_utils.py              # Timezone/sessions helper functions
+    cache_manager.py           # Symbol-token cache loader/updater (manual refresh)
+    config_loader.py           # YAML loading helper, shared across project
+
+  results/
+    ...                       # Saved backtest trade logs, reports, and graphs
