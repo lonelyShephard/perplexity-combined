@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 import logging
 import uuid
+from utils.time_utils import now_ist
 
 logger = logging.getLogger(__name__)
 
@@ -143,7 +144,16 @@ class PositionManager:
         self.completed_trades: List[Trade] = []
         self.daily_pnl = 0.0
         self.session_params = config.get('session', {})
-        logger.info(f"PositionManager initialized with capital: ₹{self.initial_capital:,}")
+        logger.info(f"PositionManager initialized with capital: {self.initial_capital:,}")
+
+    def _ensure_timezone(self, dt):
+        """Ensure datetime is timezone-aware for consistent comparisons"""
+        if dt is None:
+            return None
+        if dt.tzinfo is None:
+            import pytz
+            return pytz.timezone('Asia/Kolkata').localize(dt)
+        return dt
 
     def calculate_lot_aligned_quantity(self, desired_quantity: int, lot_size: int) -> int:
         if lot_size <= 1:  # Equity
@@ -201,7 +211,7 @@ class PositionManager:
         entry_costs = self.calculate_total_costs(actual_entry_price, quantity, is_buy=True)
         required_capital = entry_costs['turnover'] + entry_costs['total_costs']
         if required_capital > self.current_capital:
-            logger.warning(f"Insufficient capital: required ₹{required_capital:,.2f}, available ₹{self.current_capital:,.2f}")
+            logger.warning(f"Insufficient capital: required {required_capital:,.2f}, available {self.current_capital:,.2f}")
             return None
         position_id = str(uuid.uuid4())[:8]
         tp_levels = [actual_entry_price + (tp * tick_size) for tp in self.tp_points]
@@ -227,8 +237,8 @@ class PositionManager:
         self.current_capital -= required_capital
         self.reserved_margin += required_capital
         self.positions[position_id] = position
-        logger.info(f"Opened LONG position {position_id}: {quantity} {symbol} @ ₹{actual_entry_price}")
-        logger.info(f"SL: ₹{stop_loss_price}, TPs: {tp_levels}")
+        logger.info(f"Opened LONG position {position_id}: {quantity} {symbol} @ {actual_entry_price}")
+        logger.info(f"SL: {stop_loss_price}, TPs: {tp_levels}")
         return position_id
 
     def close_position_partial(self, position_id: str, exit_price: float,
@@ -314,9 +324,26 @@ class PositionManager:
                     exits.append((exit_quantity, reason))
         return exits
 
-    def process_positions(self, current_data: pd.Series, timestamp: datetime):
-        current_price = current_data['close']
-        session_end = current_data.get('session_exit', False)
+    def process_positions(self, row, timestamp, session_params=None):
+        """Enhanced position processing with session awareness"""
+        current_price = row['close']
+        
+        # Check for session exit if parameters provided
+        if session_params:
+            from utils.time_utils import is_time_to_exit
+            exit_buffer = session_params.get('exit_before_close', 20)
+            end_hour = session_params.get('intraday_end_hour', 15)
+            end_min = session_params.get('intraday_end_min', 30)
+            
+            if is_time_to_exit(timestamp, exit_buffer, end_hour, end_min):
+                # Close all positions for session end
+                for position_id in list(self.positions.keys()):
+                    self.close_position_full(position_id, current_price, timestamp, "Session End")
+                return
+        
+        # Ensure timezone-aware
+        timestamp = self._ensure_timezone(timestamp)
+        
         for position_id in list(self.positions.keys()):
             position = self.positions.get(position_id)
             if not position or position.status == PositionStatus.CLOSED:
@@ -422,7 +449,7 @@ class PositionManager:
         self.daily_pnl = 0.0
         self.positions.clear()
         self.completed_trades.clear()
-        logger.info(f"Position Manager reset with capital: ₹{self.initial_capital:,}")
+        logger.info(f"Position Manager reset with capital: {self.initial_capital:,}")
 
     # Legacy compatibility methods for backtest engine
     def enter_position(self, side: str, price: float, quantity: int, timestamp: datetime,
@@ -441,6 +468,53 @@ class PositionManager:
     def can_enter_position(self) -> bool:
         return len(self.positions) < self.config.get('max_positions_per_day', 10)
 
+    def calculate_position_size_gui_driven(self, entry_price: float, stop_loss_price: float, 
+                                     user_capital: float, user_risk_pct: float, 
+                                     user_lot_size: int) -> dict:
+        """
+        GUI-driven position sizing with comprehensive feedback
+        
+        Returns:
+            dict with position details and capital analysis
+        """
+        
+        if entry_price <= 0 or stop_loss_price <= 0:
+            return {"error": "Invalid price inputs"}
+        
+        risk_per_unit = abs(entry_price - stop_loss_price)
+        
+        # Risk-based calculation
+        max_risk_amount = user_capital * (user_risk_pct / 100)
+        risk_based_quantity = int(max_risk_amount / risk_per_unit) if risk_per_unit > 0 else 0
+        
+        # Capital-constrained calculation  
+        usable_capital = user_capital * 0.95  # 95% utilization limit
+        max_affordable_shares = int(usable_capital / entry_price)
+        capital_based_quantity = (max_affordable_shares // user_lot_size) * user_lot_size
+        
+        # Hybrid selection (conservative approach)
+        final_quantity = min(risk_based_quantity, capital_based_quantity)
+        final_lots = final_quantity // user_lot_size
+        aligned_quantity = final_lots * user_lot_size
+        
+        # Calculate all metrics for GUI display
+        position_value = aligned_quantity * entry_price
+        actual_risk = aligned_quantity * risk_per_unit
+        actual_risk_pct = (actual_risk / user_capital) * 100 if user_capital > 0 else 0
+        capital_utilization = (position_value / user_capital) * 100 if user_capital > 0 else 0
+        
+        return {
+            "recommended_quantity": aligned_quantity,
+            "recommended_lots": final_lots,
+            "position_value": position_value,
+            "capital_utilization_pct": capital_utilization,
+            "actual_risk_amount": actual_risk,
+            "actual_risk_pct": actual_risk_pct,
+            "max_affordable_lots": max_affordable_shares // user_lot_size,
+            "risk_based_lots": risk_based_quantity // user_lot_size,
+            "approach_used": "risk_limited" if final_quantity == risk_based_quantity else "capital_limited"
+        }
+
 if __name__ == "__main__":
     # Example usage and testing
     from datetime import datetime
@@ -457,10 +531,29 @@ if __name__ == "__main__":
         'stt_percent': 0.025
     }
     pm = PositionManager(test_config)
-    position_id = pm.open_position("NIFTY24DECFUT", 22000.0, datetime.now(), 15, 0.05)
+    position_id = pm.open_position("NIFTY24DECFUT", 22000.0, now_ist(), 15, 0.05)
     print(f"Opened position ID: {position_id}")
     # Simulate price move to hit take profit
-    pm.process_positions(pd.Series({'close': 22035.0, 'session_exit': False}), datetime.now())
+    pm.process_positions(pd.Series({'close': 22035.0, 'session_exit': False}), now_ist())
     summary = pm.get_performance_summary()
     print("Performance Summary:", summary)
     print("✅ Position Manager test completed!")
+
+
+"""
+CONFIGURATION PARAMETER NAMING CONVENTION:
+- Constructor parameter: __init__(self, config: Dict[str, Any])
+- Internal storage: self.config = config
+- All parameter access: config.get('parameter_name', default)
+- Session parameters: self.session_params = config.get('session', {})
+
+PARAMETER STRUCTURE EXPECTATION:
+This class expects a consolidated configuration dictionary containing:
+- Strategy parameters (direct keys in config)
+- Risk management parameters (direct keys in config)
+- Instrument parameters (direct keys in config)
+- Capital parameters (direct keys in config)
+- Session parameters under 'session' key
+
+CRITICAL: Calling code must pass consolidated config, not separate parameter dictionaries
+"""

@@ -161,7 +161,7 @@ def _validate_and_apply_defaults(config: Dict[str, Any]) -> Dict[str, Any]:
         'intraday_start_hour': 9,
         'intraday_start_min': 15,
         'intraday_end_hour': 15,
-        'intraday_end_min': 15,
+        'intraday_end_min': 30,  # Correct NSE closing time (3:30 PM)
         'exit_before_close': 20,
         'timezone': 'Asia/Kolkata'
     }
@@ -208,6 +208,22 @@ def _validate_config_values(config: Dict[str, Any]) -> None:
     """
     errors = []
     
+    # Validate session parameters
+    session = config.get('session', {})
+    start_hour = session.get('intraday_start_hour', 9)
+    start_min = session.get('intraday_start_min', 15)
+    end_hour = session.get('intraday_end_hour', 15)
+    end_min = session.get('intraday_end_min', 30)
+    
+    start_minutes = start_hour * 60 + start_min
+    end_minutes = end_hour * 60 + end_min
+    
+    if start_minutes >= end_minutes:
+        errors.append("Session start time must be before end time")
+    
+    if session.get('exit_before_close', 20) >= (end_minutes - start_minutes):
+        errors.append("exit_before_close cannot be longer than session duration")
+    
     # Validate strategy parameters
     strategy = config['strategy']
     if strategy.get('fast_ema', 0) >= strategy.get('slow_ema', 0):
@@ -229,19 +245,6 @@ def _validate_config_values(config: Dict[str, Any]) -> None:
     if capital.get('initial_capital', 0) <= 0:
         errors.append("initial_capital must be positive")
     
-    # Validate session
-    session = config['session']
-    start_hour = session.get('intraday_start_hour', 9)
-    start_min = session.get('intraday_start_min', 15)
-    end_hour = session.get('intraday_end_hour', 15)
-    end_min = session.get('intraday_end_min', 15)
-    
-    start_time = start_hour * 60 + start_min
-    end_time = end_hour * 60 + end_min
-    
-    if start_time >= end_time:
-        errors.append("intraday_start_time must be before intraday_end_time")
-    
     # Validate instrument
     instrument = config['instrument']
     if instrument.get('lot_size', 0) <= 0:
@@ -251,7 +254,7 @@ def _validate_config_values(config: Dict[str, Any]) -> None:
         errors.append("tick_size must be positive")
     
     if errors:
-        raise ValueError(f"Configuration validation failed: {'; '.join(errors)}")
+        raise ValueError("Configuration validation failed:\n" + "\n".join(errors))
 
 def save_config(config: Dict[str, Any], config_path: str = DEFAULT_CONFIG_PATH) -> None:
     """
@@ -388,7 +391,7 @@ def create_config_template(output_path: str = "config/strategy_config_template.y
             'intraday_start_hour': 9,
             'intraday_start_min': 15,
             'intraday_end_hour': 15,
-            'intraday_end_min': 15,
+            'intraday_end_min': 30,  # Correct NSE closing time (3:30 PM)
             'exit_before_close': 20
         },
         'instrument': {

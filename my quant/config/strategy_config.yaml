@@ -1,6 +1,9 @@
 # strategy_config.yaml – Master Configuration
 
 strategy:
+  # === Indicator Update Mode ===
+  indicator_update_mode: "tick"
+
   # === Toggles: Turn indicators/filters ON or OFF ===
   use_ema_crossover: true
   use_macd: true
@@ -79,7 +82,7 @@ session:
   intraday_start_hour: 9
   intraday_start_min: 15
   intraday_end_hour: 15
-  intraday_end_min: 15
+  intraday_end_min: 30
   exit_before_close: 20
   timezone: Asia/Kolkata
 
@@ -101,3 +104,13 @@ live:
   feed_type: Quote
   log_ticks: false
   visual_indicator: true
+
+data_quality:
+  strict_mode: true          # Fail fast on critical data issues
+  drop_invalid: true         # Drop bad rows instead of trying to fix
+  price_precision: 2         # Decimal places for prices
+  volume_precision: 0        # Decimal places for volumes (integers)
+  min_price: 0.01           # Minimum valid price
+  max_price: 1000000.0      # Maximum valid price
+  min_volume: 0             # Minimum valid volume
+  max_volume: 100000000     # Maximum valid volume

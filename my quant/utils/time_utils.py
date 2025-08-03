@@ -11,10 +11,10 @@ Features:
 - Market holiday and weekend handling
 """
 
-import pytz
-from datetime import datetime, time, timedelta, date
-from typing import Optional, Tuple
+from datetime import datetime, time, timedelta, date, timezone
+from typing import Optional, Tuple, NewType
 import logging
+import pytz
 
 logger = logging.getLogger(__name__)
 
@@ -27,16 +27,32 @@ DEFAULT_MARKET_CLOSE = time(15, 30)  # 3:30 PM
 DEFAULT_PRE_MARKET_OPEN = time(9, 0)  # 9:00 AM
 DEFAULT_POST_MARKET_CLOSE = time(15, 40)  # 3:40 PM
 
-def now_kolkata() -> datetime:
-    """Get current time in IST/Asia-Kolkata timezone."""
-    return datetime.now(IST)
+ISTDateTime = NewType('ISTDateTime', datetime)
 
-def to_kolkata(dt: datetime) -> datetime:
-    """Convert datetime to IST timezone."""
+def now_ist() -> ISTDateTime:
+    """
+    SINGLE SOURCE OF TRUTH for current time.
+    Always returns timezone-aware datetime in IST.
+    """
+    return ISTDateTime(datetime.now(IST))
+
+def normalize_datetime_to_ist(dt: datetime) -> ISTDateTime:
+    """
+    SINGLE NORMALIZATION FUNCTION for all datetime objects.
+    Converts any datetime to IST-aware datetime.
+    
+    Args:
+        dt: Input datetime (naive or aware)
+    
+    Returns:
+        IST-aware datetime
+    """
     if dt.tzinfo is None:
-        # Assume UTC if no timezone info
-        dt = pytz.UTC.localize(dt)
-    return dt.astimezone(IST)
+        # Assume naive datetime is in IST
+        return ISTDateTime(IST.localize(dt))
+    else:
+        # Convert to IST
+        return ISTDateTime(dt.astimezone(IST))
 
 def format_timestamp(dt: datetime, include_timezone: bool = False) -> str:
     """
@@ -87,9 +103,9 @@ def is_market_session(current_time: Optional[datetime] = None,
         True if within trading session
     """
     if current_time is None:
-        current_time = now_kolkata()
+        current_time = now_ist()
     else:
-        current_time = to_kolkata(current_time)
+        current_time = normalize_datetime_to_ist(current_time)
     
     current_time_only = current_time.time()
     return open_time <= current_time_only <= close_time
@@ -105,9 +121,9 @@ def is_weekday(dt: Optional[datetime] = None) -> bool:
         True if weekday
     """
     if dt is None:
-        dt = now_kolkata()
+        dt = now_ist()
     else:
-        dt = to_kolkata(dt)
+        dt = normalize_datetime_to_ist(dt)
     
     return dt.weekday() < 5  # 0-4 are Monday-Friday
 
@@ -126,40 +142,37 @@ def get_market_close_time(dt: Optional[datetime] = None,
         Market close datetime in IST
     """
     if dt is None:
-        dt = now_kolkata()
+        dt = now_ist()
     else:
-        dt = to_kolkata(dt)
+        dt = normalize_datetime_to_ist(dt)
     
     market_date = dt.date()
     close_time = time(close_hour, close_minute)
     
     return IST.localize(datetime.combine(market_date, close_time))
 
-def is_time_to_exit(current_time: Optional[datetime] = None, 
-                   minutes_before_close: int = 20,
-                   close_hour: int = 15, 
-                   close_minute: int = 30) -> bool:
+def is_time_to_exit(current_time: datetime, exit_buffer: int, end_hour: int, end_min: int) -> bool:
     """
-    Check if it's time to exit all positions (N minutes before market close).
+    Centralized timing logic for session exit.
     
     Args:
-        current_time: Current time (default: current IST time)
-        minutes_before_close: Minutes before close to trigger exit
-        close_hour: Market close hour
-        close_minute: Market close minute
+        current_time: Current timestamp
+        exit_buffer: Minutes before close to start exiting
+        end_hour: Market end hour
+        end_min: Market end minute
         
     Returns:
-        True if should exit positions
+        True if should start exiting positions
     """
-    if current_time is None:
-        current_time = now_kolkata()
+    if current_time.tzinfo is not None:
+        current_minutes = current_time.hour * 60 + current_time.minute
     else:
-        current_time = to_kolkata(current_time)
+        current_minutes = current_time.time().hour * 60 + current_time.time().minute
+        
+    end_minutes = end_hour * 60 + end_min
+    exit_start_minutes = end_minutes - exit_buffer
     
-    close_dt = get_market_close_time(current_time, close_hour, close_minute)
-    exit_time = close_dt - timedelta(minutes=minutes_before_close)
-    
-    return current_time >= exit_time
+    return current_minutes >= exit_start_minutes
 
 def get_session_remaining_minutes(current_time: Optional[datetime] = None,
                                 close_hour: int = 15,
@@ -176,9 +189,9 @@ def get_session_remaining_minutes(current_time: Optional[datetime] = None,
         Remaining minutes until market close (0 if market closed)
     """
     if current_time is None:
-        current_time = now_kolkata()
+        current_time = now_ist()
     else:
-        current_time = to_kolkata(current_time)
+        current_time = normalize_datetime_to_ist(current_time)
     
     close_dt = get_market_close_time(current_time, close_hour, close_minute)
     
@@ -205,9 +218,9 @@ def calculate_session_progress(current_time: Optional[datetime] = None,
         Session progress as fraction (0.0 = just opened, 1.0 = closed)
     """
     if current_time is None:
-        current_time = now_kolkata()
+        current_time = now_ist()
     else:
-        current_time = to_kolkata(current_time)
+        current_time = normalize_datetime_to_ist(current_time)
     
     open_dt = IST.localize(datetime.combine(current_time.date(), time(open_hour, open_minute)))
     close_dt = IST.localize(datetime.combine(current_time.date(), time(close_hour, close_minute)))
@@ -232,9 +245,9 @@ def get_next_trading_day(dt: Optional[datetime] = None) -> date:
         Next trading day
     """
     if dt is None:
-        dt = now_kolkata()
+        dt = now_ist()
     else:
-        dt = to_kolkata(dt)
+        dt = normalize_datetime_to_ist(dt)
     
     next_day = dt.date() + timedelta(days=1)
     
@@ -255,9 +268,9 @@ def get_previous_trading_day(dt: Optional[datetime] = None) -> date:
         Previous trading day
     """
     if dt is None:
-        dt = now_kolkata()
+        dt = now_ist()
     else:
-        dt = to_kolkata(dt)
+        dt = normalize_datetime_to_ist(dt)
     
     prev_day = dt.date() - timedelta(days=1)
     
@@ -282,9 +295,9 @@ def is_pre_market(current_time: Optional[datetime] = None,
         True if in pre-market session
     """
     if current_time is None:
-        current_time = now_kolkata()
+        current_time = now_ist()
     else:
-        current_time = to_kolkata(current_time)
+        current_time = normalize_datetime_to_ist(current_time)
     
     current_time_only = current_time.time()
     return pre_market_start <= current_time_only < market_open
@@ -304,9 +317,9 @@ def is_post_market(current_time: Optional[datetime] = None,
         True if in post-market session
     """
     if current_time is None:
-        current_time = now_kolkata()
+        current_time = now_ist()
     else:
-        current_time = to_kolkata(current_time)
+        current_time = normalize_datetime_to_ist(current_time)
     
     current_time_only = current_time.time()
     return market_close < current_time_only <= post_market_end
@@ -321,7 +334,7 @@ def wait_for_market_open(poll_interval: int = 60) -> None:
     import time as time_module
     
     while not is_market_session():
-        current = now_kolkata()
+        current = now_ist()
         next_open = get_market_session_times(current.date())[0]
         
         if current >= next_open:
@@ -346,9 +359,9 @@ def get_trading_session_info(dt: Optional[datetime] = None) -> dict:
         Dictionary with session information
     """
     if dt is None:
-        dt = now_kolkata()
+        dt = now_ist()
     else:
-        dt = to_kolkata(dt)
+        dt = normalize_datetime_to_ist(dt)
     
     open_dt, close_dt = get_market_session_times(dt.date())
     
@@ -417,10 +430,27 @@ def get_market_calendar(year: int) -> list:
     
     return trading_days
 
+def ensure_tz_aware(dt, fallback_tz=None, default_tz="Asia/Kolkata"):
+    """Ensure datetime is timezone aware."""
+    if dt.tzinfo is not None:
+        return dt
+    
+    # Handle timezone object vs string
+    if fallback_tz is not None:
+        if hasattr(fallback_tz, 'zone'):
+            # It's a timezone object, get the zone name
+            tz_name = fallback_tz.zone
+        else:
+            # It's already a string
+            tz_name = fallback_tz
+        return pytz.timezone(tz_name).localize(dt)
+    else:
+        return pytz.timezone(default_tz).localize(dt)
+
 # Example usage and testing
 if __name__ == "__main__":
     # Test current time functions
-    current = now_kolkata()
+    current = now_ist()
     print(f"Current IST time: {current}")
     print(f"Formatted timestamp: {format_timestamp(current)}")
     

@@ -12,9 +12,9 @@ import time
 import yaml
 import logging
 import importlib
-from datetime import datetime
 from core.position_manager import PositionManager
 from live.broker_adapter import BrokerAdapter
+from utils.time_utils import now_ist
 
 def load_config(config_path: str):
     with open(config_path, 'r') as f:
@@ -64,7 +64,7 @@ class LiveTrader:
                 if not tick:
                     time.sleep(0.1)
                     continue
-                now = tick['timestamp'] if 'timestamp' in tick else datetime.now()
+                now = tick['timestamp'] if 'timestamp' in tick else now_ist()
                 # Aggregate bars
                 bars = self.broker.get_recent_bars(last_n=100)
                 if bars.empty:
@@ -115,7 +115,7 @@ class LiveTrader:
     def close_position(self, reason: str = "Manual"):
         if self.active_position_id and self.active_position_id in self.position_manager.positions:
             last_price = self.broker.get_last_price()
-            now = datetime.now()
+            now = now_ist()
             self.position_manager.close_position_full(self.active_position_id, last_price, now, reason)
             logger = logging.getLogger(__name__)
             logger.info(f"[SIM] Position closed at {last_price} for reason: {reason}")

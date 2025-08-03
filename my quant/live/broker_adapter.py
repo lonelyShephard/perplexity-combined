@@ -16,6 +16,7 @@ import pandas as pd
 import os
 
 from utils.config_loader import load_config
+from utils.time_utils import now_ist, normalize_datetime_to_ist
 
 logger = logging.getLogger(__name__)
 
@@ -102,14 +103,14 @@ class BrokerAdapter:
             last = self.last_price or 22000.0
             direction = 1 if int(time.time() * 10) % 2 == 0 else -1
             price = last + direction * self.tick_size
-            tick = {"timestamp": datetime.now(), "price": price, "volume": 1500}
+            tick = {"timestamp": now_ist(), "price": price, "volume": 1500}
             self.last_price = price
             self._buffer_tick(tick)
             return tick
         try:
             ltp = self.connection.ltpData(self.exchange, self.symbol, self.instrument.get("instrument_token", ""))
             price = float(ltp["data"]["ltp"])
-            tick = {"timestamp": datetime.now(), "price": price, "volume": 1000}
+            tick = {"timestamp": now_ist(), "price": price, "volume": 1000}
             self.last_price = price
             self._buffer_tick(tick)
             return tick
@@ -127,7 +128,7 @@ class BrokerAdapter:
     def get_recent_bars(self, last_n: int = 100) -> pd.DataFrame:
         """Aggregate tick buffer into most recent N 1-min OHLCV bars."""
         if self.df_tick.empty:
-            now = datetime.now()
+            now = now_ist()
             return pd.DataFrame({
                 "open": [self.last_price],
                 "high": [self.last_price],

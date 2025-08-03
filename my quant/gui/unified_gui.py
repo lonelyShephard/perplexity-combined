@@ -20,13 +20,15 @@ import yaml
 from backtest.backtest_runner import run_backtest
 from live.trader import LiveTrader
 from utils.cache_manager import load_symbol_cache, refresh_symbol_cache, get_token_for_symbol
+from utils.simple_loader import load_data_simple
+from utils.time_utils import now_ist
 
 LOG_FILENAME = "unified_gui.log"
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler(LOG_FILENAME),
+        logging.FileHandler(LOG_FILENAME, encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -57,13 +59,18 @@ class UnifiedTradingGUI(tk.Tk):
         self._forward_thread = None
         self.symbol_token_map = {}  # Initialize simple symbol-to-token mapping
 
+        self.capital_usable = tk.StringVar(value="₹0 (0%)")
+        self.max_lots = tk.StringVar(value="0 lots (0 shares)")
+        self.max_risk = tk.StringVar(value="₹0 (0%)")
+        self.recommended_lots = tk.StringVar(value="0 lots (0 shares)")
+
     # --- Backtest Tab ---
     def _build_backtest_tab(self):
         frame = self.tab_backtest
         frame.columnconfigure(1, weight=1)
         row = 0
         
-        ttk.Label(frame, text="Select Data CSV:").grid(row=row, column=0, sticky="e", padx=5, pady=5)
+        ttk.Label(frame, text="Data File (.csv, .log):").grid(row=row, column=0, sticky="e")
         self.bt_data_file = tk.StringVar()
         ttk.Entry(frame, textvariable=self.bt_data_file, width=55).grid(row=row, column=1, padx=5, pady=5)
         ttk.Button(frame, text="Browse", command=self._bt_browse_csv).grid(row=row, column=2, padx=5, pady=5)
@@ -97,6 +104,18 @@ class UnifiedTradingGUI(tk.Tk):
         ttk.Checkbutton(bt_indicators_frame, text="Bollinger Bands", variable=self.bt_use_bollinger_bands).grid(row=1, column=1, sticky="w", padx=5)
         ttk.Checkbutton(bt_indicators_frame, text="Stochastic", variable=self.bt_use_stochastic).grid(row=1, column=2, sticky="w", padx=5)
         ttk.Checkbutton(bt_indicators_frame, text="ATR", variable=self.bt_use_atr).grid(row=1, column=3, sticky="w", padx=5)
+        row += 1
+
+        # --- Strategy version selector ---------------------------------
+        ttk.Label(frame, text="Strategy Version:", font=('Arial', 10, 'bold')).grid(row=row, column=0, sticky="w", padx=5, pady=(10,2))
+        row += 1
+
+        self.bt_strategy_version = tk.StringVar(value="research")   # default for backtest
+        ttk.Combobox(frame,
+                     textvariable=self.bt_strategy_version,
+                     values=["research", "live"],
+                     width=12,
+                     state="readonly").grid(row=row, column=0, sticky="w", padx=5, pady=2)
         row += 1
 
         # Parameters
@@ -198,6 +217,12 @@ class UnifiedTradingGUI(tk.Tk):
         ttk.Entry(bt_risk_frame, textvariable=self.bt_initial_capital, width=12).grid(row=3, column=1, padx=2)
         row += 1
 
+        # Add instrument panel before capital management
+        row = self._build_instrument_panel(frame, row)
+
+        # Add capital management panel after risk management
+        row = self._build_capital_management_panel(frame, row)
+
         ttk.Button(frame, text="Run Backtest", command=self._bt_run_backtest).grid(row=row, column=0, columnspan=3, pady=10)
         row += 1
 
@@ -205,30 +230,125 @@ class UnifiedTradingGUI(tk.Tk):
         self.bt_result_box.grid(row=row, column=0, columnspan=3, padx=5, pady=5, sticky="nsew")
         frame.rowconfigure(row, weight=1)
 
+    def _build_capital_management_panel(self, frame, row):
+        """Build comprehensive capital management panel"""
+        
+        # Capital Management Header
+        ttk.Label(frame, text="Capital Management:", font=('Arial', 10, 'bold')).grid(
+            row=row, column=0, sticky="w", padx=5, pady=(10,2)
+        )
+        row += 1
+        
+        capital_frame = ttk.Frame(frame)
+        capital_frame.grid(row=row, column=0, columnspan=3, sticky="w", padx=5, pady=2)
+        
+        # User Input Fields
+        ttk.Label(capital_frame, text="Available Capital:").grid(row=0, column=0, sticky="e", padx=2)
+        self.bt_available_capital = tk.StringVar(value="100000")
+        capital_entry = ttk.Entry(capital_frame, textvariable=self.bt_available_capital, width=12)
+        capital_entry.grid(row=0, column=1, padx=2)
+        capital_entry.bind('<KeyRelease>', self._update_capital_calculations)
+        
+        ttk.Label(capital_frame, text="Risk % per Trade:").grid(row=0, column=2, sticky="e", padx=2)
+        self.bt_risk_percentage = tk.StringVar(value="1.0")
+        risk_entry = ttk.Entry(capital_frame, textvariable=self.bt_risk_percentage, width=8)
+        risk_entry.grid(row=0, column=3, padx=2)
+        risk_entry.bind('<KeyRelease>', self._update_capital_calculations)
+        
+        # Instrument Configuration
+        ttk.Label(capital_frame, text="Lot Size:").grid(row=1, column=0, sticky="e", padx=2)
+        self.bt_lot_size = tk.StringVar(value="75")  # NIFTY default
+        lot_entry = ttk.Entry(capital_frame, textvariable=self.bt_lot_size, width=8)
+        lot_entry.grid(row=1, column=1, padx=2)
+        lot_entry.bind('<KeyRelease>', self._update_capital_calculations)
+        
+        ttk.Label(capital_frame, text="Price per Unit:").grid(row=1, column=2, sticky="e", padx=2)
+        self.bt_current_price = tk.StringVar(value="154.00")  # Sample price
+        price_entry = ttk.Entry(capital_frame, textvariable=self.bt_current_price, width=8)
+        price_entry.grid(row=1, column=3, padx=2)
+        price_entry.bind('<KeyRelease>', self._update_capital_calculations)
+        
+        # Real-time Capital Display (Read-only)
+        display_frame = ttk.LabelFrame(capital_frame, text="Capital Analysis", padding=5)
+        display_frame.grid(row=2, column=0, columnspan=4, sticky="ew", pady=(10,0))
+        
+        # Capital Usage Display
+        self.capital_usable = tk.StringVar(value="₹95,000 (95%)")
+        ttk.Label(display_frame, text="Capital Usable:").grid(row=0, column=0, sticky="w")
+        ttk.Label(display_frame, textvariable=self.capital_usable, foreground="blue").grid(
+            row=0, column=1, sticky="w", padx=10
+        )
+        
+        self.max_lots = tk.StringVar(value="8 lots (600 shares)")
+        ttk.Label(display_frame, text="Max Affordable Lots:").grid(row=0, column=2, sticky="w", padx=10)
+        ttk.Label(display_frame, textvariable=self.max_lots, foreground="green").grid(
+            row=0, column=3, sticky="w", padx=10
+        )
+        
+        self.max_risk = tk.StringVar(value="₹1,000 (1%)")
+        ttk.Label(display_frame, text="Max Capital at Risk:").grid(row=1, column=0, sticky="w")
+        ttk.Label(display_frame, textvariable=self.max_risk, foreground="red").grid(
+            row=1, column=1, sticky="w", padx=10
+        )
+        
+        self.recommended_lots = tk.StringVar(value="1 lot (75 shares)")
+        ttk.Label(display_frame, text="Recommended Position:").grid(row=1, column=2, sticky="w", padx=10)
+        ttk.Label(display_frame, textvariable=self.recommended_lots, foreground="purple").grid(
+            row=1, column=3, sticky="w", padx=10
+        )
+        
+        return row + 1
+
     def _bt_browse_csv(self):
-        path = filedialog.askopenfilename(title="Select CSV File", filetypes=[("CSV Files", "*.csv")])
-        if path:
-            self.bt_data_file.set(path)
+        file = filedialog.askopenfilename(
+            title="Select Data File",
+            filetypes=[
+                ("CSV and LOG files", "*.csv;*.log"),
+                ("CSV files", "*.csv"),
+                ("LOG files", "*.log"),
+                ("All files", "*.*")
+            ]
+        )
+        if file:
+            self.bt_data_file.set(file)
 
     def _bt_run_backtest(self):
+        # Validate inputs first
+        validation = self._validate_position_parameters()
+        if not validation["valid"]:
+            error_msg = "Validation Errors:\n" + "\n".join(validation["errors"])
+            messagebox.showerror("Invalid Parameters", error_msg)
+            return
+        
+        # Show warnings if any
+        if validation["warnings"]:
+            warning_msg = "Warnings:\n" + "\n".join(validation["warnings"]) + "\n\nDo you want to continue?"
+            if not messagebox.askyesno("Parameter Warnings", warning_msg):
+                return
+
         if self._backtest_thread and self._backtest_thread.is_alive():
             messagebox.showinfo("Info", "Backtest already running.")
             return
-        
+
         data_path = self.bt_data_file.get()
-        
+
+        if not (data_path.endswith(".csv") or data_path.endswith(".log")):
+            messagebox.showerror("File Error", "Please select a .csv or .log file")
+            return
+
         if not os.path.isfile(data_path):
             messagebox.showerror("File Error", "Please select a valid CSV data file.")
             return
-            
+
         self.bt_result_box.config(state="normal")
         self.bt_result_box.delete("1.0", "end")
         self.bt_result_box.insert("end", f"Running backtest on {os.path.basename(data_path)}...\n")
         self.bt_result_box.config(state="disabled")
         
-        # Create config from GUI inputs (instead of relying on YAML file)
+        # Enhanced config with validated GUI parameters
         gui_config = {
             "strategy": {
+                "strategy_version": self.bt_strategy_version.get(),
                 "use_ema_crossover": self.bt_use_ema_crossover.get(),
                 "use_macd": self.bt_use_macd.get(),
                 "use_vwap": self.bt_use_vwap.get(),
@@ -247,32 +367,40 @@ class UnifiedTradingGUI(tk.Tk):
                 "rsi_oversold": int(self.bt_rsi_oversold.get()),
                 "rsi_overbought": int(self.bt_rsi_overbought.get()),
                 "htf_period": int(self.bt_htf_period.get()),
-                "base_sl_points": int(self.bt_base_sl_points.get()),
-                "risk_per_trade_percent": float(self.bt_risk_per_trade_percent.get())
+                "base_sl_points": validation["sl_points"],
+                "indicator_update_mode": "tick",
+                "risk_per_trade_percent": validation["risk_pct"]
             },
             "risk": {
-                "base_sl_points": int(self.bt_base_sl_points.get()),
+                "base_sl_points": validation["sl_points"],
                 "use_trail_stop": self.bt_use_trail_stop.get(),
                 "trail_activation_points": int(self.bt_trail_activation_points.get()),
                 "trail_distance_points": int(self.bt_trail_distance_points.get()),
                 "tp_points": [int(self.bt_tp1_points.get()), int(self.bt_tp2_points.get()), 
                              int(self.bt_tp3_points.get()), int(self.bt_tp4_points.get())],
                 "tp_percents": [0.25, 0.25, 0.25, 0.25],
-                "risk_per_trade_percent": float(self.bt_risk_per_trade_percent.get()),
+                "risk_per_trade_percent": validation["risk_pct"],
                 "commission_percent": 0.1,
                 "commission_per_trade": 0.0,
                 "buy_buffer": 0
             },
             "capital": {
-                "initial_capital": int(self.bt_initial_capital.get())
+                "initial_capital": validation["capital"]
+            },
+            "instrument": {
+                "symbol": self.bt_instrument_type.get(),
+                "exchange": "NSE_FO",
+                "lot_size": validation["lot_size"],
+                "tick_size": 0.05,
+                "product_type": "INTRADAY"
             },
             "session": {
-                "is_intraday": True,
                 "intraday_start_hour": 9,
                 "intraday_start_min": 15,
                 "intraday_end_hour": 15,
-                "intraday_end_min": 15,
-                "exit_before_close": 20
+                "intraday_end_min": 30,  # ✅ CORRECTED from 15 to 30
+                "exit_before_close": 20,
+                "timezone": "Asia/Kolkata"
             },
             "backtest": {
                 "max_drawdown_pct": 0,
@@ -281,13 +409,6 @@ class UnifiedTradingGUI(tk.Tk):
                 "save_results": True,
                 "results_dir": "backtest_results",
                 "log_level": "INFO"
-            },
-            "instrument": {
-                "symbol": "NIFTY",
-                "exchange": "NSE_FO",
-                "lot_size": 50,
-                "tick_size": 0.05,
-                "product_type": "INTRADAY"
             }
         }
         
@@ -296,7 +417,16 @@ class UnifiedTradingGUI(tk.Tk):
 
     def _bt_worker(self, config_dict, data_path):
         try:
-            trades_df, metrics = run_backtest(config_dict, data_path)
+            self.bt_result_box.config(state="normal")
+            self.bt_result_box.insert("end", "Loading data with simple loader...\n")
+            self.bt_result_box.config(state="disabled")
+            
+            # Load data with simple loader
+            df_normalized = load_data_simple(data_path, process_as_ticks=True)
+            
+            # Run backtest with the loaded data
+            trades_df, metrics = run_backtest(config_dict, data_path, df_normalized=df_normalized)
+            
             summary = (
                 f"---- BACKTEST SUMMARY ----\n"
                 f"Total Trades: {metrics['total_trades']}\n"
@@ -380,10 +510,22 @@ class UnifiedTradingGUI(tk.Tk):
         ttk.Combobox(frame, textvariable=self.ft_feed_type, values=feed_types, width=12, state='readonly').grid(row=row, column=1, sticky="w", padx=5, pady=2)
         row += 1
 
+        # --- Strategy version selector ---------------------------------
+        ttk.Label(frame, text="Strategy Version:", font=('Arial', 10, 'bold')).grid(row=row, column=0, sticky="w", padx=5, pady=(10,2))
+        row += 1
+
+        self.ft_strategy_version = tk.StringVar(value="live")       # default for forward test
+        ttk.Combobox(frame,
+                     textvariable=self.ft_strategy_version,
+                     values=["research", "live"],
+                     width=12,
+                     state="readonly").grid(row=row, column=0, sticky="w", padx=5, pady=2)
+        row += 1
+
         # Strategy Configuration
         ttk.Label(frame, text="Strategy Configuration", font=('Arial', 12, 'bold')).grid(row=row, column=0, columnspan=3, sticky="w", pady=(15,5))
         row += 1
-
+        
         # Indicator Toggles
         ttk.Label(frame, text="Indicators:", font=('Arial', 10, 'bold')).grid(row=row, column=0, sticky="w", padx=5, pady=2)
         row += 1
@@ -503,6 +645,10 @@ class UnifiedTradingGUI(tk.Tk):
         ttk.Label(risk_frame, text="Risk % per Trade:").grid(row=2, column=4, sticky="e", padx=2)
         self.ft_risk_per_trade_percent = tk.StringVar(value="1.0")
         ttk.Entry(risk_frame, textvariable=self.ft_risk_per_trade_percent, width=8).grid(row=2, column=5, padx=2)
+        
+        ttk.Label(risk_frame, text="Initial Capital:").grid(row=3, column=0, sticky="e", padx=2)
+        self.ft_initial_capital = tk.StringVar(value="100000")
+        ttk.Entry(risk_frame, textvariable=self.ft_initial_capital, width=12).grid(row=3, column=1, padx=2)
         row += 1
 
         # Trading Controls
@@ -699,12 +845,12 @@ class UnifiedTradingGUI(tk.Tk):
                 "initial_capital": 100000
             },
             "session": {
-                "is_intraday": True,
                 "intraday_start_hour": 9,
                 "intraday_start_min": 15,
                 "intraday_end_hour": 15,
-                "intraday_end_min": 15,
-                "exit_before_close": 20
+                "intraday_end_min": 30,  # ✅ CORRECTED from 15 to 30
+                "exit_before_close": 20,
+                "timezone": "Asia/Kolkata"
             }
         }
         
@@ -759,7 +905,7 @@ class UnifiedTradingGUI(tk.Tk):
             "✅ System Status: Ready\n"
             "🔒 Trading Mode: Simulation Only (No Real Orders)\n"
             "📊 Available Modes: Backtest & Forward Test\n\n"
-            f"Current Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+            f"Current Time: {now_ist().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
             "BACKTEST MODE:\n"
             "- Load historical CSV data\n"
             "- Configure strategy parameters\n"
@@ -809,6 +955,141 @@ class UnifiedTradingGUI(tk.Tk):
             if self._forward_thread and self._forward_thread.is_alive():
                 logger.info("Stopping forward test thread...")
             self.destroy()
+
+    def _update_capital_calculations(self, event=None):
+        """Update all capital calculations in real-time"""
+        try:
+            # Get user inputs
+            available_capital = float(self.bt_available_capital.get().replace(',', ''))
+            risk_percentage = float(self.bt_risk_percentage.get())
+            lot_size = int(self.bt_lot_size.get())
+            current_price = float(self.bt_current_price.get())
+            stop_loss_points = float(self.bt_base_sl_points.get())
+            
+            # Calculate usable capital (95% rule)
+            usable_capital = available_capital * 0.95
+            self.capital_usable.set(f"₹{usable_capital:,.0f} ({usable_capital/available_capital*100:.0f}%)")
+            
+            # Calculate maximum affordable lots
+            max_affordable_shares = int(usable_capital / current_price)
+            max_lots_count = max_affordable_shares // lot_size
+            max_lots_shares = max_lots_count * lot_size
+            self.max_lots.set(f"{max_lots_count} lots ({max_lots_shares:,} shares)")
+            
+            # Calculate risk-based position sizing
+            max_risk_amount = available_capital * (risk_percentage / 100)
+            risk_per_share = stop_loss_points
+            risk_based_shares = int(max_risk_amount / risk_per_share) if risk_per_share > 0 else 0
+            risk_based_lots = risk_based_shares // lot_size
+            
+            # Choose the smaller (more conservative) approach
+            recommended_lots_count = min(max_lots_count, risk_based_lots)
+            recommended_shares = recommended_lots_count * lot_size
+            
+            self.max_risk.set(f"₹{max_risk_amount:,.0f} ({risk_percentage}%)")
+            self.recommended_lots.set(f"{recommended_lots_count} lots ({recommended_shares:,} shares)")
+            
+        except (ValueError, ZeroDivisionError):
+            # Handle invalid inputs gracefully
+            self.capital_usable.set("Invalid Input")
+            self.max_lots.set("Invalid Input")
+            self.max_risk.set("Invalid Input") 
+            self.recommended_lots.set("Invalid Input")
+
+    def _validate_position_parameters(self) -> dict:
+        """Validate all position parameters and provide feedback"""
+        
+        try:
+            capital = float(self.bt_available_capital.get().replace(',', ''))
+            risk_pct = float(self.bt_risk_percentage.get())
+            price = float(self.bt_current_price.get())
+            sl_points = float(self.bt_base_sl_points.get())
+            lot_size = int(self.bt_lot_size.get())
+            
+            warnings = []
+            errors = []
+            
+            # Capital validation
+            if capital < 10000:
+                errors.append("Minimum capital requirement: ₹10,000")
+            
+            # Risk validation
+            if risk_pct < 0.1:
+                warnings.append("Very low risk percentage may limit trading opportunities")
+            elif risk_pct > 5.0:
+                warnings.append("Risk percentage above 5% is aggressive")
+            
+            # Position size validation
+            min_position_value = lot_size * price
+            if min_position_value > capital * 0.95:
+                errors.append(f"Insufficient capital for even 1 lot (₹{min_position_value:,.0f} required)")
+            
+            # Stop loss validation
+            if sl_points <= 0:
+                errors.append("Stop loss must be positive")
+            elif sl_points > price * 0.1:
+                warnings.append("Stop loss seems very wide (>10% of price)")
+            
+            return {
+                "valid": len(errors) == 0,
+                "errors": errors,
+                "warnings": warnings,
+                "capital": capital,
+                "risk_pct": risk_pct,
+                "lot_size": lot_size,
+                "price": price,
+                "sl_points": sl_points
+            }
+            
+        except ValueError:
+            return {
+                "valid": False,
+                "errors": ["Please enter valid numeric values"],
+                "warnings": []
+            }
+
+    def _build_instrument_panel(self, frame, row):
+        """Build instrument selection and configuration panel"""
+        
+        instrument_frame = ttk.LabelFrame(frame, text="Instrument Configuration", padding=5)
+        instrument_frame.grid(row=row, column=0, columnspan=3, sticky="ew", pady=5)
+        
+        # Instrument presets
+        ttk.Label(instrument_frame, text="Instrument:").grid(row=0, column=0, sticky="e", padx=5)
+        
+        self.bt_instrument_type = tk.StringVar(value="NIFTY")
+        instrument_combo = ttk.Combobox(instrument_frame, textvariable=self.bt_instrument_type, 
+                                       values=["NIFTY", "BANKNIFTY", "FINNIFTY", "SENSEX", "BANKEX", "CUSTOM"], 
+                                       width=12, state="readonly")
+        instrument_combo.grid(row=0, column=1, padx=5)
+        instrument_combo.bind('<<ComboboxSelected>>', self._on_instrument_change)
+        
+        # Lot size gets auto-updated based on instrument
+        ttk.Label(instrument_frame, text="Lot Size:").grid(row=0, column=2, sticky="e", padx=5)
+        self.bt_lot_size_display = ttk.Label(instrument_frame, text="75", relief="sunken", width=10)
+        self.bt_lot_size_display.grid(row=0, column=3, padx=5)
+        
+        return row + 1
+
+    def _on_instrument_change(self, event=None):
+        """Update lot size and other parameters when instrument changes"""
+        instrument = self.bt_instrument_type.get()
+        
+        lot_sizes = {
+            "NIFTY": 75,
+            "BANKNIFTY": 25,
+            "FINNIFTY": 25, 
+            "SENSEX": 10,
+            "BANKEX": 15,
+            "CUSTOM": 75  # Default for custom
+        }
+        
+        lot_size = lot_sizes.get(instrument, 75)
+        self.bt_lot_size.set(str(lot_size))
+        self.bt_lot_size_display.config(text=str(lot_size))
+        
+        # Trigger capital recalculation
+        self._update_capital_calculations()
 
 if __name__ == "__main__":
     app = UnifiedTradingGUI()
