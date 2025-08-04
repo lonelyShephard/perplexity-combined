@@ -1,4 +1,5 @@
-# strategy_config.yaml – Master Configuration
+# strategy_config.yaml – Master Configuration for Unified Trading System
+# All parameters are validated and have sensible defaults
 
 strategy:
   # === Toggles: Turn indicators/filters ON or OFF ===
@@ -66,10 +67,16 @@ risk:
   tp_points: [10, 25, 50, 100]
   tp_percents: [0.25, 0.25, 0.25, 0.25]
 
-  risk_per_trade_percent: 1.0    # % of total capital risked per trade
+  risk_per_trade_percent: 3.0    # % of total capital risked per trade
   commission_percent: 0.1        # Commission as percentage per trade
   commission_per_trade: 0.0      # Minimum per-trade commission
   buy_buffer: 0                  # Optional points buffer for entry slippage
+  
+  # === Additional Risk Parameters ===
+  max_position_value_percent: 95 # Maximum position value as % of capital
+  stt_percent: 0.025 # Securities Transaction Tax
+  exchange_charges_percent: 0.0019 # Exchange charges
+  gst_percent: 18.0 # GST on charges
 
 capital:
   initial_capital: 100000
@@ -79,7 +86,8 @@ session:
   intraday_start_hour: 9
   intraday_start_min: 15
   intraday_end_hour: 15
-  intraday_end_min: 15
+  intraday_end_min: 30
+  # ^^^ CORRECTED: NSE closes at 3:30 PM, not 3:15 PM
   exit_before_close: 20
   timezone: Asia/Kolkata
 
@@ -88,6 +96,14 @@ reentry:
   reentry_momentum_lookback: 3
   reentry_min_green_candles: 1
 
+# === Instrument Configuration ===
+instrument:
+  symbol: NIFTY24DECFUT
+  exchange: NSE_FO
+  lot_size: 75  # NIFTY lot size (as of 2024)
+  tick_size: 0.05
+  product_type: INTRADAY
+
 backtest:
   max_drawdown_pct: 0           # 0 disables early stop
   allow_short: false            # Enforce long-only
@@ -95,9 +111,15 @@ backtest:
   save_results: true
   results_dir: backtest_results
   log_level: INFO
+  max_trades_per_day: 25 # Maximum trades per session
 
 live:
   exchange_type: NSE_FO
   feed_type: Quote
   log_ticks: false
   visual_indicator: true
+  paper_trading: true # Always default to simulation mode
+  
+  # SmartAPI configuration (use environment variables for sensitive data)
+  # Set TRADING_LIVE_API_KEY, TRADING_LIVE_CLIENT_CODE, etc.
+  strict_mode: true # Fail fast on critical data issues

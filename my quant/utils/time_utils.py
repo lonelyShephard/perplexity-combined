@@ -135,29 +135,38 @@ def get_market_close_time(dt: Optional[datetime] = None,
     
     return IST.localize(datetime.combine(market_date, close_time))
 
-def is_time_to_exit(current_time: Optional[datetime] = None, 
-                   minutes_before_close: int = 20,
-                   close_hour: int = 15, 
-                   close_minute: int = 30) -> bool:
+def is_time_to_exit(current_time: datetime, exit_buffer: int, end_hour: int, end_min: int) -> bool:
     """
     Check if it's time to exit all positions (N minutes before market close).
     
     Args:
-        current_time: Current time (default: current IST time)
-        minutes_before_close: Minutes before close to trigger exit
-        close_hour: Market close hour
-        close_minute: Market close minute
-        
+        current_time: Current timestamp
+        exit_buffer: Minutes before close to start exiting
+        end_hour: Market end hour
+        end_min: Market end minute
+         
     Returns:
-        True if should exit positions
+        True if should start exiting positions
     """
-    if current_time is None:
-        current_time = now_kolkata()
+    # Validate inputs
+    if exit_buffer < 0:
+        logger.warning(f"Invalid exit buffer {exit_buffer}, using 0")
+        exit_buffer = 0
+    if not (0 <= end_hour <= 23):
+        logger.warning(f"Invalid end hour {end_hour}, using 15")
+        end_hour = 15
+    if not (0 <= end_min <= 59):
+        logger.warning(f"Invalid end minute {end_min}, using 30")
+        end_min = 30
+            
+    if current_time.tzinfo is not None:
+        current_minutes = current_time.hour * 60 + current_time.minute
     else:
         current_time = to_kolkata(current_time)
+        current_minutes = current_time.hour * 60 + current_time.minute
     
-    close_dt = get_market_close_time(current_time, close_hour, close_minute)
-    exit_time = close_dt - timedelta(minutes=minutes_before_close)
+    end_time = current_time.replace(hour=end_hour, minute=end_min, second=0, microsecond=0)
+    exit_time = end_time - timedelta(minutes=exit_buffer)
     
     return current_time >= exit_time
 
