@@ -71,18 +71,7 @@ class ModularIntradayStrategy:
         return self.indicators.calculate_all_indicators(data, self.config)
 
     def calculate_indicators(self, data: pd.DataFrame) -> pd.DataFrame:
-        """
-        Calculate all indicators for the strategy.
-        
-        This method provides compatibility with the backtest runner interface.
-        Internally calls indicators_and_signals() for consistency.
-        
-        Args:
-            data: OHLCV DataFrame
-            
-        Returns:
-            DataFrame with indicators added
-        """
+        """Calculate all indicators for the strategy; memory optim parameters removed."""
         return self.indicators_and_signals(data)
 
     def entry_signal(self, row: pd.Series) -> bool:
@@ -92,7 +81,7 @@ class ModularIntradayStrategy:
             pass_ema = (
                 row.get('fast_ema', None) is not None and
                 row.get('slow_ema', None) is not None and
-                row['fast_ema'] > row['slow_ema'] + self.config.get('ema_points_threshold', 0)
+                row['fast_ema'] > row['slow_ema']
             )
         # --- VWAP ---
         pass_vwap = True

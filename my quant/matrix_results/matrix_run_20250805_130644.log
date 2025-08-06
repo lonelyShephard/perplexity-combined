@@ -1,0 +1,649 @@
+2025-08-05 13:06:44,892 - __main__ - INFO - Matrix backtest started. Log file: matrix_results/matrix_run_20250805_130644.log
+2025-08-05 13:06:44,893 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:44,894 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:06:44,895 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:44,904 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:06:44,905 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:06:44,905 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:06:44,906 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:06:44,908 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:06:44,910 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:06:49,119 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:06:49,130 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:06:49,141 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:06:49,144 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:06:49,155 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:06:49,165 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:06:49,170 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:06:49,187 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:49,195 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:06:49,196 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:49,197 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:06:49,205 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:06:49,208 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:06:49,209 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:06:49,210 - backtest.backtest_runner - INFO - 
+2025-08-05 13:06:49,211 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:06:49,231 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:06:49,232 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:06:49,233 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:06:49,234 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:06:49,247 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:06:49,248 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:06:49,248 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:06:49,249 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:06:49,250 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:06:49,251 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:49,256 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:06:49,296 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:49,307 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:06:49,308 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:49,310 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:06:49,311 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:06:49,317 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:06:49,351 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:06:49,353 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:06:49,366 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:06:53,547 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:06:53,556 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:06:53,562 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:06:53,568 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:06:53,569 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:06:53,572 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:06:53,578 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:06:53,591 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:53,610 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:06:53,620 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:53,623 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:06:53,624 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:06:53,625 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:06:53,630 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:06:53,637 - backtest.backtest_runner - INFO - 
+2025-08-05 13:06:53,637 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:06:53,688 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:06:53,692 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:06:53,693 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:06:53,694 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:06:53,696 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:06:53,698 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:06:53,699 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:06:53,709 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:06:53,710 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:06:53,712 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:53,716 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:06:53,866 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:53,870 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:06:53,871 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:53,896 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:06:53,900 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:06:53,939 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:06:53,992 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:06:53,995 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:06:53,997 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:06:57,810 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:06:57,819 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:06:57,850 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:06:57,852 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:06:57,855 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:06:57,857 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:06:57,874 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:06:57,886 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:57,889 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:06:57,897 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:57,905 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:06:57,906 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:06:57,907 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:06:57,910 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:06:57,917 - backtest.backtest_runner - INFO - 
+2025-08-05 13:06:57,917 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:06:57,923 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:06:57,924 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:06:57,926 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:06:57,928 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:06:57,934 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:06:57,936 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:06:57,941 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:06:57,943 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:06:57,946 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:06:57,947 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:57,949 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:06:57,980 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:57,989 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:06:57,990 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:06:57,992 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:06:57,992 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:06:58,001 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:06:58,012 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:06:58,014 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:06:58,025 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:02,600 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:02,610 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:02,616 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:02,628 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:02,630 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:02,634 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:02,638 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:02,649 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:02,651 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:02,653 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:02,658 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:02,660 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:02,663 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:02,666 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:02,668 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:02,712 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:02,714 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:02,715 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:02,715 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:02,716 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:02,717 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:02,718 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:02,722 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:02,726 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:02,734 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:02,736 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:02,738 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:02,775 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:02,776 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:02,777 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:02,778 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:02,779 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:02,793 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:02,796 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:02,796 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:02,799 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:09,327 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:09,337 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:09,347 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:09,353 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:09,377 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:09,380 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:09,395 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:09,412 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:09,416 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:09,417 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:09,418 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:09,419 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:09,419 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:09,455 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:09,456 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:09,458 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:09,458 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:09,459 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:09,460 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:09,461 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:09,465 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:09,470 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:09,472 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:09,473 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:09,480 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:09,482 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:09,484 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:09,502 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:09,520 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:09,520 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:09,522 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:09,531 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:09,538 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:09,540 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:09,562 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:09,564 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:20,244 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:20,323 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:20,402 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:20,489 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:20,636 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:20,877 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:21,004 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:21,073 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:21,205 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:21,352 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:21,411 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:21,450 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:21,483 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:21,522 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:21,617 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:21,685 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:21,705 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:21,726 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:21,731 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:21,768 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:21,807 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:21,832 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:21,931 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:21,981 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:21,995 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:22,032 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:22,065 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:22,521 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:22,561 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:22,571 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:22,576 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:22,598 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:22,601 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:22,605 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:22,616 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:22,618 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:30,284 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:30,299 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:30,314 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:30,315 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:30,324 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:30,326 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:30,332 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:30,352 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:30,355 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:30,355 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:30,366 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:30,367 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:30,368 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:30,369 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:30,372 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:30,373 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:30,374 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:30,374 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:30,375 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:30,376 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:30,388 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:30,389 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:30,390 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:30,391 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:30,393 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:30,394 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:30,395 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:30,413 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:30,414 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:30,416 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:30,429 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:30,431 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:30,432 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:30,433 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:30,448 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:30,449 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:35,427 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:35,437 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:35,446 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:35,450 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:35,470 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:35,472 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:35,476 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:35,494 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:35,499 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:35,500 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:35,501 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:35,519 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:35,520 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:35,535 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:35,535 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:35,536 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:35,537 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:35,537 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:35,541 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:35,542 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:35,543 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:35,543 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:35,552 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:35,554 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:35,559 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:35,560 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:35,563 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:35,577 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:35,580 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:35,581 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:35,582 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:35,583 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:35,594 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:35,595 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:35,596 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:35,597 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:39,936 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:39,981 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:39,996 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:40,060 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:40,123 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:40,157 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:40,192 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:40,238 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:40,255 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:40,256 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:40,257 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:40,259 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:40,261 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:40,263 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:40,263 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:40,264 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:40,265 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:40,266 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:40,281 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:40,282 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:40,283 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:40,284 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:40,285 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:40,287 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:40,295 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:40,297 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:40,298 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:40,306 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:40,309 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:40,315 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:40,318 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:40,319 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:40,321 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:40,322 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:40,323 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:40,326 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:45,810 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:45,842 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:45,876 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:45,914 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:45,974 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:46,029 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:46,039 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:46,099 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:46,121 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:46,133 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:46,141 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:46,151 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:46,152 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:46,155 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:46,204 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:46,213 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:46,220 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:46,224 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:46,225 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:46,226 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:46,228 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:46,231 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:46,236 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:46,237 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:46,237 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:46,238 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:46,239 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:46,254 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:46,255 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:46,256 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:46,259 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:46,270 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:46,275 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:46,278 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:46,280 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:46,281 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:49,069 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:49,075 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:49,086 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:49,087 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:49,093 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:49,094 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:49,096 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:49,101 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:49,103 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:49,107 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:49,114 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:49,115 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:49,115 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:49,116 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:49,116 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:49,117 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:49,117 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:49,118 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:49,118 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:49,119 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:49,119 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:49,120 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:49,124 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:49,124 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:49,125 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:49,125 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:49,126 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:49,160 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:49,162 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:49,164 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:49,167 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:49,168 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:49,178 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:49,179 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:49,180 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:49,181 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:51,221 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:51,231 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:51,244 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:51,257 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:51,262 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:51,294 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:51,316 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:51,325 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:51,344 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:51,358 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:51,379 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:51,385 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:51,387 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:51,389 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:51,400 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:51,420 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:51,426 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:51,441 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:51,445 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:51,456 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:51,457 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:51,467 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:51,482 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:51,517 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:51,532 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:51,542 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:51,554 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:51,574 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:51,576 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:51,577 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:51,578 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:51,578 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:51,579 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:51,579 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:51,580 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:51,581 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:53,142 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:53,146 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:53,150 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:53,151 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:53,153 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:53,155 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:53,159 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:53,163 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:53,164 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:53,164 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:53,165 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:53,165 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:53,165 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:53,173 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:53,173 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:53,174 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:53,174 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:53,175 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:53,175 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:53,175 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:53,176 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:53,176 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:53,177 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:53,178 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:53,178 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:53,178 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:53,179 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:53,185 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:53,187 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:53,190 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:53,192 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:53,192 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:53,193 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:53,193 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:53,194 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:53,194 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:54,681 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:54,685 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:54,687 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:54,688 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:54,690 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:54,691 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:54,694 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:54,699 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:54,699 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:54,701 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:54,704 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:54,704 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:54,706 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:54,706 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:54,706 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:54,707 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:54,707 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:54,707 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:54,708 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:54,708 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:54,708 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:54,709 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:54,709 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:54,709 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:54,710 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:54,710 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:54,712 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:54,716 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:54,717 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:54,717 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:54,718 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:54,718 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:54,719 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:54,719 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:54,720 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:54,721 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:56,284 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:56,288 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:56,291 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:56,293 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:56,297 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:56,298 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:56,303 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:56,308 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:56,308 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:56,309 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:56,310 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:56,310 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:56,310 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:56,311 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:56,311 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:56,312 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:56,313 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:56,314 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:56,318 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:56,318 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:56,319 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:56,320 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:56,321 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:56,321 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:56,322 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:56,322 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:56,323 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:56,326 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:56,328 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:56,329 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:56,329 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:56,330 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:56,330 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:56,331 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:56,332 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:56,333 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:58,234 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:58,238 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:58,240 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:58,241 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:58,243 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:58,244 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:58,249 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:58,254 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:58,257 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:58,257 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:58,258 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:58,258 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:58,259 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:58,259 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:58,260 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:58,261 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:58,262 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:58,262 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:58,262 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:58,263 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:58,263 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:58,263 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:58,264 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:58,265 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:58,265 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:58,266 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:58,267 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:58,270 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:58,272 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:58,272 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:58,274 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:58,276 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:58,279 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:58,279 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:58,280 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:58,280 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:59,833 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:07:59,836 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:07:59,839 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:07:59,840 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:07:59,842 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:07:59,843 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:07:59,851 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:07:59,854 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:59,855 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:07:59,855 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:59,856 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:07:59,856 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:07:59,856 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:07:59,857 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:07:59,857 - backtest.backtest_runner - INFO - 
+2025-08-05 13:07:59,859 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:07:59,859 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:07:59,859 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:07:59,860 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:07:59,860 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:07:59,860 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:07:59,861 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:07:59,861 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:07:59,861 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:07:59,861 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:07:59,862 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:59,863 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 13:07:59,866 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:59,872 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 13:07:59,873 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:07:59,873 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 13:07:59,874 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 13:07:59,874 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 13:07:59,875 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 13:07:59,875 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:07:59,875 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 13:08:03,432 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 13:08:03,442 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 13:08:03,445 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 13:08:03,446 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 13:08:03,447 - backtest.backtest_runner - INFO - Trimmed dataset from 36151 to 1000 rows for optimized indicator calculation
+2025-08-05 13:08:03,451 - core.indicators - INFO - Validating data quality for 1000 rows
+2025-08-05 13:08:03,453 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 13:08:03,456 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:08:03,456 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 13:08:03,458 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:08:03,459 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 13:08:03,459 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 13:08:03,459 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 13:08:03,461 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 13:08:03,463 - backtest.backtest_runner - INFO - 
+2025-08-05 13:08:03,466 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 13:08:03,466 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 13:08:03,467 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 13:08:03,467 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 13:08:03,467 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 13:08:03,468 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 13:08:03,468 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 13:08:03,468 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 13:08:03,469 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 13:08:03,469 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 13:08:03,469 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 13:08:03,470 - backtest.backtest_runner - WARNING - No trades executed during backtest

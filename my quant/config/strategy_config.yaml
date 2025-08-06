@@ -19,7 +19,6 @@ strategy:
   # === EMA (Exponential Moving Average) Crossover ===
   fast_ema: 9
   slow_ema: 21
-  ema_points_threshold: 2   # Minimum points gap between EMAs to confirm cross
 
   # === MACD Parameters ===
   macd_fast: 12

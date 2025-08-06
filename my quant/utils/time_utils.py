@@ -447,6 +447,26 @@ def ensure_tz_aware(dt, fallback_tz=None, default_tz="Asia/Kolkata"):
     else:
         return pytz.timezone(default_tz).localize(dt)
 
+def is_trading_session(current_time: datetime, start_time: time, end_time: time) -> bool:
+    """Check if the current time is within the trading session."""
+    if not isinstance(current_time, datetime):
+        return False
+    
+    # Ensure all times are timezone-aware for correct comparison
+    current_time_aware = ensure_tz_aware(current_time)
+    
+    # Create timezone-aware start and end datetimes for the same day as current_time
+    start_dt = current_time_aware.replace(hour=start_time.hour, minute=start_time.minute, second=0, microsecond=0)
+    end_dt = current_time_aware.replace(hour=end_time.hour, minute=end_time.minute, second=0, microsecond=0)
+
+    is_active = start_dt <= current_time_aware <= end_dt
+    
+    # ✅ DIAGNOSTIC: Log the comparison details periodically
+    if current_time.second == 1: # Log once per minute
+        logger.debug(f"Session Check: Start({start_dt}) <= Current({current_time_aware}) <= End({end_dt}) -> {is_active}")
+        
+    return is_active
+
 # Example usage and testing
 if __name__ == "__main__":
     # Test current time functions

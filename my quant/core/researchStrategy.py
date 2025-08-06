@@ -72,7 +72,7 @@ class ModularIntradayStrategy:
         )
         self.intraday_end = time(
             self.session_params.get('intraday_end_hour', 15),
-            self.session_params.get('intraday_end_min', 15)
+            self.session_params.get('intraday_end_min', 30)
         )
         self.exit_before_close = self.session_params.get('exit_before_close', 20)
         
@@ -95,8 +95,7 @@ class ModularIntradayStrategy:
         # EMA parameters
         self.fast_ema = config.get('fast_ema', 9)
         self.slow_ema = config.get('slow_ema', 21)
-        self.ema_points_threshold = config.get('ema_points_threshold', 2)
-        
+ 
         # MACD parameters
         self.macd_fast = config.get('macd_fast', 12)
         self.macd_slow = config.get('macd_slow', 26)
@@ -133,41 +132,9 @@ class ModularIntradayStrategy:
         logger.info(f"Indicators enabled: EMA={self.use_ema_crossover}, MACD={self.use_macd}, "
                    f"VWAP={self.use_vwap}, HTF={self.use_htf_trend}, RSI={self.use_rsi_filter}")
     
-    def calculate_indicators(self, df, memory_optimized=False, max_lookback=None):
-        """Calculate all technical indicators with optional memory optimization."""
-        # Set calculation windows based on optimization settings
-        if memory_optimized:
-            # Safety check for max_lookback
-            if max_lookback is None:
-                logger.warning("Memory optimization requested but max_lookback is None, using normal parameters")
-                return calculate_all_indicators(df, self.config)
-
-            # Use smaller lookback windows for large tick datasets
-            logger.info("Using memory-optimized indicator parameters")
-            # Create a copy of parameters with reduced lookback periods
-            optimized_params = self.config.copy()
-            # Adjust EMA periods
-            optimized_params["fast_ema"] = min(self.config.get("fast_ema", 9), max_lookback//3)
-            optimized_params["slow_ema"] = min(self.config.get("slow_ema", 21), max_lookback//2)
-            # Adjust MACD parameters
-            optimized_params["macd_fast"] = min(self.config.get("macd_fast", 12), max_lookback//3)
-            optimized_params["macd_slow"] = min(self.config.get("macd_slow", 26), max_lookback//2)
-            optimized_params["macd_signal"] = min(self.config.get("macd_signal", 9), max_lookback//4)
-            # Adjust other lookback parameters
-            optimized_params["rsi_length"] = min(self.config.get("rsi_length", 14), max_lookback//3)
-            optimized_params["htf_period"] = min(self.config.get("htf_period", 20), max_lookback//3)
-            optimized_params["bb_period"] = min(self.config.get("bb_period", 20), max_lookback//3)
-            optimized_params["atr_len"] = min(self.config.get("atr_len", 14), max_lookback//3)
-            
-            # Log the optimized parameters
-            logger.info(f"Reduced lookback periods: EMA {optimized_params['fast_ema']}/{optimized_params['slow_ema']}, "
-                      f"MACD {optimized_params['macd_fast']}/{optimized_params['macd_slow']}/{optimized_params['macd_signal']}")
-            
-            # Use the optimized parameters
-            return calculate_all_indicators(df, optimized_params)
-        else:
-            # Use normal parameters
-            return calculate_all_indicators(df, self.config)
+    def calculate_indicators(self, df):
+        """Calculate all technical indicators."""
+        return calculate_all_indicators(df, self.config)
     
     def is_trading_session(self, current_time: datetime) -> bool:
         """
@@ -280,20 +247,30 @@ class ModularIntradayStrategy:
         
         # === EMA CROSSOVER SIGNAL ===
         if self.use_ema_crossover:
-            if ('fast_ema' in row and 'slow_ema' in row and 
+            if ('fast_ema' in row and 'slow_ema' in row and
                 not pd.isna(row['fast_ema']) and not pd.isna(row['slow_ema'])):
-                
-                # Check EMA crossover with points threshold
+                # Check EMA crossover 
                 fast_ema = row['fast_ema']
                 slow_ema = row['slow_ema']
-                ema_gap = fast_ema - slow_ema
                 
-                if ema_gap >= self.ema_points_threshold:
+                # Add detailed logging every 1000 calls
+                if not hasattr(self, '_ema_log_count'):
+                    self._ema_log_count = 0
+                self._ema_log_count += 1
+                
+                if self._ema_log_count % 1000 == 0:
+                    logger.info(f"EMA Analysis #{self._ema_log_count//1000}:")
+                    logger.info(f"  Fast EMA: {fast_ema:.4f}")
+                    logger.info(f"  Slow EMA: {slow_ema:.4f}")
+                    logger.info(f"  Difference: {fast_ema - slow_ema:.4f}")
+                    logger.info(f"  Bullish: {fast_ema > slow_ema}")
+                
+                if fast_ema > slow_ema:
                     signal_conditions.append(True)
-                    signal_reasons.append(f"EMA Cross: {fast_ema:.2f} > {slow_ema:.2f} (+{ema_gap:.2f})")
+                    signal_reasons.append(f"EMA Cross: {fast_ema:.2f} > {slow_ema:.2f}")
                 else:
                     signal_conditions.append(False)
-                    signal_reasons.append(f"EMA Cross: Insufficient gap {ema_gap:.2f}")
+                    signal_reasons.append(f"EMA Cross: Fast EMA not above Slow EMA")
             else:
                 signal_conditions.append(False)
                 signal_reasons.append("EMA Cross: Data not available")
@@ -630,7 +607,6 @@ class ModularIntradayStrategy:
             'parameters': {
                 'fast_ema': self.fast_ema,
                 'slow_ema': self.slow_ema,
-                'ema_points_threshold': self.ema_points_threshold,
                 'htf_period': self.htf_period,
                 'base_sl_points': self.base_sl_points,
                 'risk_per_trade_percent': self.risk_per_trade_percent
@@ -744,6 +720,109 @@ class ModularIntradayStrategy:
         # Simple minutes-based comparison that ignores timezone
         return start_minutes <= current_minutes <= end_minutes
 
+    def entry_signal(self, row: pd.Series) -> bool:
+        # Collect signal conditions from enabled indicators only
+        signal_conditions = []
+        signal_reasons = []
+
+        # EMA Crossover
+        if self.config.get('use_ema_crossover', False):
+            if ('fast_ema' in row and 'slow_ema' in row and
+                not pd.isna(row['fast_ema']) and not pd.isna(row['slow_ema'])):
+                # Check EMA crossover 
+                fast_ema = row['fast_ema']
+                slow_ema = row['slow_ema']
+                if fast_ema > slow_ema:
+                    signal_conditions.append(True)
+                    signal_reasons.append(f"EMA Cross: {fast_ema:.2f} > {slow_ema:.2f}")
+                else:
+                    signal_conditions.append(False)
+                    signal_reasons.append(f"EMA Cross: Fast EMA not above Slow EMA")
+            else:
+                signal_conditions.append(False)
+                signal_reasons.append("EMA Cross: Data not available")
+
+        # VWAP
+        if self.config.get('use_vwap', False):
+            if 'vwap' in row and not pd.isna(row['vwap']):
+                if row['close'] > row['vwap']:
+                    signal_conditions.append(True)
+                    signal_reasons.append(f"VWAP: Price {row['close']:.2f} > VWAP {row['vwap']:.2f}")
+                else:
+                    signal_conditions.append(False)
+                    signal_reasons.append(f"VWAP: Price {row['close']:.2f} not above VWAP {row['vwap']:.2f}")
+            else:
+                signal_conditions.append(False)
+                signal_reasons.append("VWAP: Data not available")
+
+        # MACD
+        if self.config.get('use_macd', False):
+            if all(x in row and not pd.isna(row[x]) for x in ['macd', 'macd_signal']):
+                macd_val = row['macd']
+                macd_signal = row['macd_signal']
+                if macd_val > macd_signal:
+                    signal_conditions.append(True)
+                    signal_reasons.append(f"MACD: {macd_val:.2f} > Signal {macd_signal:.2f}")
+                else:
+                    signal_conditions.append(False)
+                    signal_reasons.append(f"MACD: Not above signal line")
+            else:
+                signal_conditions.append(False)
+                signal_reasons.append("MACD: Data not available")
+        
+        # Higher Timeframe Trend
+        if self.config.get('use_htf_trend', False):
+            if 'htf_trend' in row and not pd.isna(row['htf_trend']):
+                if row['htf_trend'] > 0:  # Positive trend
+                    signal_conditions.append(True)
+                    signal_reasons.append(f"HTF Trend: Bullish ({row['htf_trend']:.2f})")
+                else:
+                    signal_conditions.append(False)
+                    signal_reasons.append(f"HTF Trend: Not bullish")
+            else:
+                signal_conditions.append(False)
+                signal_reasons.append("HTF Trend: Data not available")
+                
+        # RSI
+        if self.config.get('use_rsi_filter', False):
+            if 'rsi' in row and not pd.isna(row['rsi']):
+                rsi_val = row['rsi']
+                rsi_lower = self.config.get('rsi_lower', 30)
+                rsi_upper = self.config.get('rsi_upper', 70)
+                if rsi_lower < rsi_val < rsi_upper:
+                    signal_conditions.append(True)
+                    signal_reasons.append(f"RSI: {rsi_val:.2f} in range ({rsi_lower}-{rsi_upper})")
+                else:
+                    signal_conditions.append(False)
+                    signal_reasons.append(f"RSI: {rsi_val:.2f} out of range")
+            else:
+                signal_conditions.append(False)
+                signal_reasons.append("RSI: Data not available")
+                
+        # Bollinger Bands
+        if self.config.get('use_bb', False):
+            if all(x in row and not pd.isna(row[x]) for x in ['bb_upper', 'bb_lower']):
+                price = row['close']
+                if row['bb_lower'] < price < row['bb_upper']:
+                    signal_conditions.append(True)
+                    signal_reasons.append(f"BB: Price {price:.2f} within bands")
+                else:
+                    signal_conditions.append(False)
+                    signal_reasons.append(f"BB: Price outside bands")
+            else:
+                signal_conditions.append(False)
+                signal_reasons.append("BB: Data not available")
+
+        # Store signal reasons for logging/debugging
+        self.last_signal_reasons = signal_reasons
+        
+        # Must have at least one enabled indicator with valid signal
+        if not signal_conditions:
+            return False
+            
+        # All enabled indicators must agree (pass their conditions)
+        return all(signal_conditions)
+
 # For backwards compatibility, create an alias
 MultiIndicatorStrategy = ModularIntradayStrategy
 
@@ -754,7 +833,6 @@ if __name__ == "__main__":
         'use_ema_crossover': True,
         'fast_ema': 9,
         'slow_ema': 21,
-        'ema_points_threshold': 2,
         'use_macd': True,
         'use_vwap': True,
         'use_htf_trend': True,  # Now optional!
@@ -814,4 +892,4 @@ CRITICAL CONSISTENCY REQUIREMENTS:
 - Always use self.config.get() for parameter access
 - Never use self.params (removed in favor of self.config)
 - Session parameter access should use self.session_params.get()
-- Indicator
+- Indicator"""

@@ -28,9 +28,8 @@ import inspect
 
 from core.position_manager import PositionManager
 from utils.simple_loader import load_data_simple
-from utils.time_utils import normalize_datetime_to_ist, now_ist, ensure_tz_aware, is_time_to_exit
-
-
+from utils.time_utils import normalize_datetime_to_ist, now_ist, ensure_tz_aware, is_time_to_exit, is_trading_session
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -50,16 +49,43 @@ def load_config(config_path: str) -> dict:
         return yaml.safe_load(f)
 
 def get_strategy(config: dict):
-    """Load strategy module with full configuration."""
+    """
+    Load strategy module with full configuration.
+
+    FIXED: Properly handles GUI's nested config structure
+    """
     version = config.get("strategy", {}).get("strategy_version", "live").lower()
+
     if version == "research":
         strat_mod = importlib.import_module("core.researchStrategy")
     else:
         strat_mod = importlib.import_module("core.liveStrategy")
-    ind_mod = importlib.import_module("core.indicators")
-    return strat_mod.ModularIntradayStrategy(config, ind_mod)
 
-def run_backtest(config, data_file, df_normalized=None, skip_indicator_calculation=False):
+    ind_mod = importlib.import_module("core.indicators")
+
+    # Flatten strategy section into root config
+    # This ensures strategy classes can find their parameters
+    strategy_section = config.get('strategy', {})
+
+    # Create flattened config with strategy params at root level
+    flattened_config = dict(config)  # Start with original config
+    flattened_config.update(strategy_section)  # Add strategy params to root
+
+    # Log the fix for verification
+    logger.info("CONFIG FIX: Flattened strategy parameters to root level")
+    logger.info(f"Strategy parameters found: {list(strategy_section.keys())}")
+
+    # Debug parameters for verification
+    debug_params = ['use_macd', 'use_htf_trend', 'use_atr', 'use_ema_crossover', 'use_vwap']
+    logger.info("VERIFICATION: Parameter values after flattening:")
+    for param in debug_params:
+        value = flattened_config.get(param, 'NOT_FOUND')
+        logger.info(f"  {param}: {value}")
+
+    return strat_mod.ModularIntradayStrategy(flattened_config, ind_mod)
+
+def run_backtest(config: Dict[str, Any], data_file: str,
+                 df_normalized=None, skip_indicator_calculation=False):
     """Run a backtest with the given configuration"""
     logger.info("=" * 60)
     logger.info("STARTING BACKTEST WITH NORMALIZED DATA PIPELINE")
@@ -76,6 +102,11 @@ def run_backtest(config, data_file, df_normalized=None, skip_indicator_calculati
     instrument_params = config.get('instrument', {})
     capital = config.get('capital', {}).get('initial_capital', 100000)
     
+    # Add a default for the symbol if it's missing
+    if 'symbol' not in instrument_params:
+        instrument_params['symbol'] = 'DEFAULT_SYMBOL'
+        logger.warning(f"Instrument symbol not found in config. Using default: '{instrument_params['symbol']}'")
+    
     # Initialize components
     strategy = get_strategy(config)
     
@@ -88,6 +119,19 @@ def run_backtest(config, data_file, df_normalized=None, skip_indicator_calculati
         'session': session_params
     }
 
+    # ✅ DIAGNOSTIC: Log the actual config being passed to PositionManager
+    logger.info("=== POSITION MANAGER CONFIG DIAGNOSTIC ===")
+    for key, value in position_config.items():
+        logger.info(f"  {key}: {value}")
+    
+    # ✅ Check critical parameters specifically
+    critical_params = ['base_sl_points', 'tp_points', 'tp_percents', 'risk_per_trade_percent', 'commission_percent']
+    missing_params = [p for p in critical_params if p not in position_config]
+    if missing_params:
+        logger.warning(f"❌ MISSING critical PositionManager parameters: {missing_params}")
+    else:
+        logger.info("All critical PositionManager parameters present")
+
     # Initialize with a single dictionary argument
     position_manager = PositionManager(position_config)
     
@@ -95,38 +139,105 @@ def run_backtest(config, data_file, df_normalized=None, skip_indicator_calculati
     if df_normalized is None:
         logger.info("Loading data with centralized loader...")
         df_normalized, quality_report = load_and_normalize_data(data_file, process_as_ticks=True)
-        logger.info(f"Data loaded: {quality_report.total_rows} rows, {quality_report.rows_dropped} dropped")
+        logger.info(f"Loaded and normalized data. Shape: {df_normalized.shape}. Time range: {df_normalized.index.min()} to {df_normalized.index.max()}")
+        if df_normalized.empty:
+            logger.error("CRITICAL: DataFrame is empty after normalization. Cannot proceed.")
+            return pd.DataFrame(), position_manager.get_performance_summary()
     else:
         # If df_normalized is provided, create a simple quality report
+        # Calculate sample indices even for pre-loaded dataframes
+        sample_indices = []
+        total_rows = len(df_normalized)
+        for chunk_start in range(0, total_rows, 1000):
+            chunk_end = min(chunk_start + 1000, total_rows)
+            if chunk_end - chunk_start >= 5:
+                step = (chunk_end - chunk_start) // 5
+                chunk_sample = [chunk_start + i * step for i in range(5)]
+            else:
+                chunk_sample = list(range(chunk_start, chunk_end))
+            sample_indices.extend(chunk_sample)
+        
+        # Remove duplicates and ensure indices are within bounds
+        sample_indices = sorted(list(set(idx for idx in sample_indices if idx < total_rows)))
+        
+        # Create quality report WITH sample_indices
         quality_report = type('SimpleQualityReport', (), {
             'total_rows': len(df_normalized),
             'rows_processed': len(df_normalized),
             'rows_dropped': 0,
-            'issues_found': {}
+            'issues_found': {},
+            'sample_indices': sample_indices  # Add this critical field
         })
     
     # Optimize memory usage for large tick dataset
     if len(df_normalized) > 5000:
         logger.info(f"Optimizing memory usage for large tick dataset ({len(df_normalized)} ticks)")
+        # Chunk processing: Process full dataset in memory-efficient chunks
+        chunk_size = min(2000, max(1000, len(df_normalized) // 10))  # Adaptive chunk size
+        logger.info(f"Processing {len(df_normalized)} rows in chunks of {chunk_size}")
         
-        # Don't convert ticks to bars (preserve tick granularity)
-        # Instead, limit the lookback periods used in indicators
-        lookback_limit = min(500, int(len(df_normalized) * 0.1))  # 10% of data or 500 max
-        
-        # Pass memory optimization parameters to indicator calculation
-        if skip_indicator_calculation and df_normalized is not None:
-            # Use pre-calculated indicators
-            df_with_indicators = df_normalized
-            print("Using pre-calculated indicators")
-        else:
-            # Calculate indicators as usual
-            df_with_indicators = strategy.calculate_indicators(df_normalized,
-                                                             memory_optimized=True,
-                                                             max_lookback=lookback_limit)
+        # Process indicators in chunks and combine results
+        df_with_indicators = process_indicators_sequential(df_normalized, strategy, chunk_size)
+        logger.info(f"Chunk processing completed. Full dataset with indicators: {len(df_with_indicators)} rows")
     else:
         # Normal processing for smaller datasets
         df_with_indicators = strategy.calculate_indicators(df_normalized)
     
+    # === STAGE 3: AFTER INDICATOR CALCULATION ===
+    if hasattr(quality_report, 'sample_indices'):
+        logger.info("=" * 80)
+        logger.info("STAGE 3: AFTER INDICATOR CALCULATION (Same Rows)")
+        logger.info("=" * 80)
+        
+        for i, idx in enumerate(quality_report.sample_indices[:25]):
+            if idx < len(df_with_indicators):
+                row_data = df_with_indicators.iloc[idx]
+                
+                # Build indicator summary string
+                indicators = []
+                if 'fast_ema' in row_data and not pd.isna(row_data['fast_ema']):
+                    indicators.append(f"FastEMA={row_data['fast_ema']:.3f}")
+                if 'slow_ema' in row_data and not pd.isna(row_data['slow_ema']):
+                    indicators.append(f"SlowEMA={row_data['slow_ema']:.3f}")
+                if 'vwap' in row_data and not pd.isna(row_data['vwap']):
+                    indicators.append(f"VWAP={row_data['vwap']:.3f}")
+                if 'macd' in row_data and not pd.isna(row_data['macd']):
+                    indicators.append(f"MACD={row_data['macd']:.4f}")
+                if 'rsi' in row_data and not pd.isna(row_data['rsi']):
+                    indicators.append(f"RSI={row_data['rsi']:.1f}")
+                
+                indicator_str = ", ".join(indicators[:4]) if indicators else "No indicators"
+                
+                # Signal status
+                signals = []
+                if 'ema_bullish' in row_data:
+                    signals.append(f"EMA_Bull={row_data['ema_bullish']}")
+                if 'vwap_bullish' in row_data:
+                    signals.append(f"VWAP_Bull={row_data['vwap_bullish']}")
+                
+                signal_str = ", ".join(signals) if signals else "No signals"
+                
+                logger.info(f"Ind  Row {idx:6d} (Sample {i+1:2d}): "
+                           f"Time={row_data.name}, "
+                           f"Close={row_data.get('close', 'N/A'):8.2f}, "
+                           f"[{indicator_str}], Signals=[{signal_str}]")
+    
+    # Log final indicator status for verification
+    logger.info("Indicators calculated. Final 5 rows:")
+    if 'fast_ema' in df_with_indicators.columns and 'slow_ema' in df_with_indicators.columns:
+        logger.info(f"\n{df_with_indicators[['close', 'fast_ema', 'slow_ema', 'vwap']].tail(5).to_string()}")
+    else:
+        logger.info(f"\n{df_with_indicators[['close', 'volume']].tail(5).to_string()}")
+
+    # Quick EMA diagnostic
+    if 'fast_ema' in df_with_indicators.columns:
+        fast_above_slow = (df_with_indicators['fast_ema'] > df_with_indicators['slow_ema']).sum()
+        total_rows = len(df_with_indicators)
+        logger.info(f"EMA DIAGNOSTIC: {fast_above_slow} out of {total_rows} rows have fast > slow ({fast_above_slow/total_rows*100:.1f}%)")
+        # Show a sample of EMA values
+        sample = df_with_indicators[['fast_ema', 'slow_ema']].dropna().head(10)
+        logger.info(f"Sample EMA values:\n{sample.to_string()}")
+
     # Backtest execution loop
     logger.info("Starting backtest execution...")
     position_id = None
@@ -223,13 +334,13 @@ def run_backtest(config, data_file, df_normalized=None, skip_indicator_calculati
     logger.info(f"Trading Performance:")
     logger.info(f"  Total Trades: {performance['total_trades']}")
     logger.info(f"  Win Rate: {performance['win_rate']:.2f}%")
-    logger.info(f"  Total P&L: ₹{performance['total_pnl']:.2f}")
-    logger.info(f"  Avg Win: ₹{performance['avg_win']:.2f}")
-    logger.info(f"  Avg Loss: ₹{performance['avg_loss']:.2f}")
+    logger.info(f"  Total P&L: {performance['total_pnl']:.2f}")
+    logger.info(f"  Avg Win: {performance['avg_win']:.2f}")
+    logger.info(f"  Avg Loss: {performance['avg_loss']:.2f}")
     logger.info(f"  Profit Factor: {performance['profit_factor']:.2f}")
-    logger.info(f"  Max Win: ₹{performance['max_win']:.2f}")
-    logger.info(f"  Max Loss: ₹{performance['max_loss']:.2f}")
-    logger.info(f"  Total Commission: ₹{performance['total_commission']:.2f}")
+    logger.info(f"  Max Win: {performance['max_win']:.2f}")
+    logger.info(f"  Max Loss: {performance['max_loss']:.2f}")
+    logger.info(f"  Total Commission: {performance['total_commission']:.2f}")
     logger.info("=" * 60)
     
     # Save trade log CSV file
@@ -294,35 +405,69 @@ def run_backtest_debug(strategy, data, position_manager, risk_manager, start_dat
 
 def load_and_normalize_data(data_path: str, process_as_ticks: bool = False) -> Tuple[pd.DataFrame, Any]:
     """
-    Centralized data loading function for the project.
-    
-    This is the SINGLE ENTRY POINT for all data processing in backtests.
-    Replaced the previous DataNormalizer implementation with a simpler approach.
-    
-    Args:
-        data_path: Path to CSV or log file
-        process_as_ticks: Whether to process as tick data
-        
-    Returns:
-        Tuple of (normalized_dataframe, quality_report)
-        
-    Raises:
-        FileNotFoundError: If input file doesn't exist
+    Centralized data loading function with comprehensive row tracking.
     """
     logger.info(f"Loading data from: {data_path}")
     
     if not os.path.isfile(data_path):
         raise FileNotFoundError(f"Data file not found: {data_path}")
+
+    # === STAGE 1: RAW DATA LOADING ===
+    df_raw = load_data_simple(data_path, process_as_ticks)
     
-    # Use simple_loader as the foundation
-    df_normalized = load_data_simple(data_path, process_as_ticks)
+    # Calculate sample rows (5 rows every 1000 rows)
+    total_rows = len(df_raw)
+    sample_indices = []
     
-    # Create a basic quality report for logging
-    quality_report = type('SimpleQualityReport', (), {
+    for chunk_start in range(0, total_rows, 1000):
+        chunk_end = min(chunk_start + 1000, total_rows)
+        # Select 5 evenly distributed rows within each 1000-row chunk
+        if chunk_end - chunk_start >= 5:
+            step = (chunk_end - chunk_start) // 5
+            chunk_sample = [chunk_start + i * step for i in range(5)]
+        else:
+            # If chunk has less than 5 rows, take all
+            chunk_sample = list(range(chunk_start, chunk_end))
+        
+        sample_indices.extend(chunk_sample)
+    
+    # Remove duplicates and ensure indices are within bounds
+    sample_indices = sorted(list(set(idx for idx in sample_indices if idx < total_rows)))
+    
+    logger.info("=" * 80)
+    logger.info("STAGE 1: RAW DATA SAMPLE (5 rows per 1000)")
+    logger.info("=" * 80)
+    logger.info(f"Sampling {len(sample_indices)} rows from {total_rows} total rows")
+    
+    for i, idx in enumerate(sample_indices[:25]):  # Limit output for readability
+        row_data = df_raw.iloc[idx]
+        logger.info(f"Raw Row {idx:6d} (Sample {i+1:2d}): "
+                   f"Time={row_data.name}, "
+                   f"Close={row_data.get('close', 'N/A'):8.2f}, "
+                   f"Volume={row_data.get('volume', 'N/A'):6.0f}")
+    
+    # === STAGE 2: AFTER NORMALIZATION ===
+    df_normalized = df_raw  # Your normalization happens in simple_loader
+    
+    logger.info("=" * 80)
+    logger.info("STAGE 2: AFTER NORMALIZATION (Same Rows)")
+    logger.info("=" * 80)
+    
+    for i, idx in enumerate(sample_indices[:25]):
+        if idx < len(df_normalized):
+            row_data = df_normalized.iloc[idx]
+            logger.info(f"Norm Row {idx:6d} (Sample {i+1:2d}): "
+                       f"Time={row_data.name}, "
+                       f"Close={row_data.get('close', 'N/A'):8.2f}, "
+                       f"Volume={row_data.get('volume', 'N/A'):6.0f}")
+    
+    # Store sample indices for later use in indicator stage
+    quality_report = type('DetailedQualityReport', (), {
         'total_rows': len(df_normalized),
         'rows_processed': len(df_normalized),
         'rows_dropped': 0,
-        'issues_found': {}
+        'issues_found': {},
+        'sample_indices': sample_indices
     })
     
     # Add basic validation (previously handled by DataNormalizer)
@@ -334,7 +479,249 @@ def load_and_normalize_data(data_path: str, process_as_ticks: bool = False) -> T
     if neg_prices > 0:
         logger.warning(f"Dataset contains {neg_prices} negative or zero prices")
     
+    logger.info("=== COMPLETE DATASET ANALYSIS ===")
+    logger.info(f"Dataset shape: {df_normalized.shape}")
+    logger.info(f"Time range: {df_normalized.index.min()} to {df_normalized.index.max()}")
+    logger.info(f"Total duration: {df_normalized.index.max() - df_normalized.index.min()}")
+
+    # Show time distribution
+    time_groups = df_normalized.groupby(df_normalized.index.hour).size()
+    logger.info("Hourly tick distribution:")
+    for hour, count in time_groups.items():
+        logger.info(f"  Hour {hour:02d}: {count:,} ticks")
+
+    # Show first and last 10 rows with timestamps
+    logger.info("First 10 rows:")
+    logger.info(f"\n{df_normalized.head(10)[['close', 'volume']].to_string()}")
+    logger.info("Last 10 rows:")
+    logger.info(f"\n{df_normalized.tail(10)[['close', 'volume']].to_string()}")
+    
     return df_normalized, quality_report
+
+def add_indicator_signals_to_chunk(chunk_df: pd.DataFrame, config: Dict[str, Any]):
+    """
+    Add indicator signals to a processed chunk.
+    
+    Args:
+        chunk_df: DataFrame chunk with computed indicators
+        config: Strategy configuration
+    """
+    from core.indicators import (
+        calculate_ema_crossover_signals, calculate_macd_signals, 
+        calculate_vwap_signals, calculate_htf_signals, calculate_rsi_signals
+    )
+    
+    # EMA Crossover Signals
+    if config.get('use_ema_crossover', False) and 'fast_ema' in chunk_df.columns:
+        ema_signals = calculate_ema_crossover_signals(
+            chunk_df['fast_ema'],
+            chunk_df['slow_ema'],
+        )
+        chunk_df = chunk_df.join(ema_signals)
+    
+    # MACD Signals
+    if config.get('use_macd', False) and 'macd' in chunk_df.columns:
+        macd_df = pd.DataFrame({
+            'macd': chunk_df['macd'],
+            'signal': chunk_df['macd_signal'],
+            'histogram': chunk_df['histogram']
+        })
+        macd_signals = calculate_macd_signals(macd_df)
+        chunk_df = chunk_df.join(macd_signals)
+    
+    # VWAP Signals
+    if config.get('use_vwap', False) and 'vwap' in chunk_df.columns:
+        vwap_signals = calculate_vwap_signals(chunk_df['close'], chunk_df['vwap'])
+        chunk_df = chunk_df.join(vwap_signals)
+    
+    # HTF Trend Signals
+    if config.get('use_htf_trend', False) and 'htf_ema' in chunk_df.columns:
+        htf_signals = calculate_htf_signals(chunk_df['close'], chunk_df['htf_ema'])
+        chunk_df = chunk_df.join(htf_signals)
+    
+    # RSI Signals
+    if config.get('use_rsi_filter', False) and 'rsi' in chunk_df.columns:
+        rsi_signals = calculate_rsi_signals(
+            chunk_df['rsi'],
+            config.get('rsi_overbought', 70),
+            config.get('rsi_oversold', 30)
+        )
+        chunk_df = chunk_df.join(rsi_signals)
+    
+    return chunk_df
+
+def process_indicators_sequential(df_normalized: pd.DataFrame, strategy, chunk_size: int = 2000) -> pd.DataFrame:
+    """
+    Process indicators sequentially without overlapping chunks to eliminate data corruption.
+
+    This approach:
+    1. Processes data in non-overlapping sequential chunks
+    2. Uses stateful indicators that maintain continuity across chunks  
+    3. Combines results without complex index manipulation
+    4. Eliminates the risk of data corruption from overlapping windows
+    """
+    logger.info("Starting sequential chunk-based indicator processing...")
+
+    total_rows = len(df_normalized)
+
+    # For small datasets, process normally without chunking
+    if total_rows <= chunk_size:
+        logger.info(f"Small dataset ({total_rows} rows), processing without chunking")
+        return strategy.calculate_indicators(df_normalized)
+
+    # Import incremental indicators (already available from indicators.py)
+    try:
+        from core.indicators import IncrementalEMA, IncrementalMACD, IncrementalVWAP, IncrementalATR
+    except ImportError:
+        logger.warning("Incremental indicators not available, falling back to full processing")
+        return strategy.calculate_indicators(df_normalized)
+
+    # Initialize indicator state trackers for continuity across chunks  
+    indicator_states = {}
+    config = strategy.config
+
+    if config.get('use_ema_crossover', False):
+        indicator_states['fast_ema'] = IncrementalEMA(period=config.get('fast_ema', 9))
+        indicator_states['slow_ema'] = IncrementalEMA(period=config.get('slow_ema', 21))
+
+    if config.get('use_macd', False):
+        indicator_states['macd'] = IncrementalMACD(
+            fast=config.get('macd_fast', 12),
+            slow=config.get('macd_slow', 26), 
+            signal=config.get('macd_signal', 9)
+        )
+
+    if config.get('use_vwap', False):
+        indicator_states['vwap'] = IncrementalVWAP()
+
+    if config.get('use_atr', False):
+        indicator_states['atr'] = IncrementalATR(period=config.get('atr_len', 14))
+
+    # Setup diagnostics
+    logger.info("=== CHUNK PROCESSING DIAGNOSTICS ===")
+    logger.info(f"Input dataset: {len(df_normalized)} rows")
+    logger.info(f"Chunk size: {chunk_size}")
+    logger.info(f"Number of chunks: {(len(df_normalized) + chunk_size - 1) // chunk_size}")
+    
+    # Process in sequential, non-overlapping chunks
+    processed_chunks = []
+    chunk_summaries = []
+
+    for start_idx in range(0, total_rows, chunk_size):
+        end_idx = min(start_idx + chunk_size, total_rows)
+        chunk_num = (start_idx // chunk_size) + 1
+        
+        logger.info(f"Processing chunk {chunk_num}: rows {start_idx}-{end_idx}")
+
+        # Get current chunk
+        chunk_df = df_normalized.iloc[start_idx:end_idx].copy()
+
+        try:
+            # Process each row in the chunk sequentially to maintain state
+            for idx, row in chunk_df.iterrows():
+
+                # EMA indicators
+                if 'fast_ema' in indicator_states:
+                    chunk_df.loc[idx, 'fast_ema'] = indicator_states['fast_ema'].update(row['close'])
+                    chunk_df.loc[idx, 'slow_ema'] = indicator_states['slow_ema'].update(row['close'])
+
+                # MACD indicator  
+                if 'macd' in indicator_states:
+                    macd_val, signal_val, hist_val = indicator_states['macd'].update(row['close'])
+                    chunk_df.loc[idx, 'macd'] = macd_val
+                    chunk_df.loc[idx, 'macd_signal'] = signal_val  
+                    chunk_df.loc[idx, 'histogram'] = hist_val
+
+                # VWAP indicator
+                if 'vwap' in indicator_states:
+                    vwap_val = indicator_states['vwap'].update(
+                        price=row['close'],
+                        volume=row['volume'],
+                        high=row.get('high'),
+                        low=row.get('low'),
+                        close=row.get('close')
+                    )
+                    chunk_df.loc[idx, 'vwap'] = vwap_val
+
+                # ATR indicator
+                if 'atr' in indicator_states:
+                    atr_val = indicator_states['atr'].update(
+                        high=row['high'],
+                        low=row['low'], 
+                        close=row['close']
+                    )
+                    chunk_df.loc[idx, 'atr'] = atr_val
+
+            # Add signal calculations based on computed indicators
+            add_indicator_signals_to_chunk(chunk_df, config)
+            
+            # Collect diagnostic info for this chunk
+            chunk_summary = {
+                'chunk': chunk_num,
+                'rows': len(chunk_df),
+                'time_start': chunk_df.index[0],
+                'time_end': chunk_df.index[-1],
+                'ema_crossovers': 0,
+                'vwap_bullish': 0
+            }
+            
+            if 'fast_ema' in chunk_df.columns and 'slow_ema' in chunk_df.columns:
+                ema_cross = (chunk_df['fast_ema'] > chunk_df['slow_ema']).sum()
+                chunk_summary['ema_crossovers'] = ema_cross
+                
+            if 'vwap' in chunk_df.columns:
+                vwap_bull = (chunk_df['close'] > chunk_df['vwap']).sum()
+                chunk_summary['vwap_bullish'] = vwap_bull
+                
+            chunk_summaries.append(chunk_summary)
+            processed_chunks.append(chunk_df)
+            
+            logger.info(f"Chunk {chunk_num} summary: {chunk_summary}")
+
+        except Exception as e:
+            logger.error(f"Error processing chunk {start_idx}-{end_idx}: {e}")
+            # Fallback: use original data for this chunk
+            processed_chunks.append(chunk_df)
+
+    # Combine all processed chunks - no complex index manipulation needed
+    df_with_indicators = pd.concat(processed_chunks, axis=0, ignore_index=False)
+
+    # Verify integrity
+    if len(df_with_indicators) != total_rows:
+        logger.error(f"Data integrity check failed: expected {total_rows}, got {len(df_with_indicators)}")
+        # Fallback to full processing
+        logger.warning("Falling back to full dataset processing")
+        return strategy.calculate_indicators(df_normalized)
+
+    # Final verification that expected indicators are present
+    expected_indicators = []
+    if config.get('use_ema_crossover', False):
+        expected_indicators.extend(['fast_ema', 'slow_ema'])
+    if config.get('use_macd', False):
+        expected_indicators.extend(['macd', 'macd_signal', 'histogram'])
+    if config.get('use_vwap', False):
+        expected_indicators.append('vwap')
+    if config.get('use_atr', False):
+        expected_indicators.append('atr')
+
+    missing_indicators = [ind for ind in expected_indicators if ind not in df_with_indicators.columns]
+    if missing_indicators:
+        logger.error(f"Missing indicators after sequential processing: {missing_indicators}")
+        logger.warning("Falling back to full dataset processing")
+        return strategy.calculate_indicators(df_normalized)
+
+    logger.info(f"Sequential chunk processing completed successfully: {len(df_with_indicators)} rows with indicators")
+    
+    # Final summary
+    logger.info("=== CHUNK PROCESSING SUMMARY ===")
+    total_ema_signals = sum(c['ema_crossovers'] for c in chunk_summaries)
+    total_vwap_signals = sum(c['vwap_bullish'] for c in chunk_summaries)
+    
+    logger.info(f"Total EMA bullish signals: {total_ema_signals}")
+    logger.info(f"Total VWAP bullish signals: {total_vwap_signals}")
+    logger.info(f"Both conditions met estimate: {min(total_ema_signals, total_vwap_signals)}")
+    
+    return df_with_indicators
 
 if __name__ == "__main__":
     import argparse

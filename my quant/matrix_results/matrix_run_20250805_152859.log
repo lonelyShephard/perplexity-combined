@@ -1,0 +1,2035 @@
+2025-08-05 15:28:59,431 - __main__ - INFO - Matrix backtest started. Log file: matrix_results/matrix_run_20250805_152859.log
+2025-08-05 15:28:59,432 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:28:59,432 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:28:59,432 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:28:59,436 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:28:59,437 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:28:59,437 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:28:59,437 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:28:59,438 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:28:59,439 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:28:59,441 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:28:59,441 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:28:59,442 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:28:59,442 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:28:59,449 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:28:59,450 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:28:59,450 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:28:59,450 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:28:59,451 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:28:59,451 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:28:59,451 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:28:59,451 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:28:59,452 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:28:59,452 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:28:59,452 - backtest.backtest_runner - INFO -   trail_activation_points: 5
+2025-08-05 15:28:59,453 - backtest.backtest_runner - INFO -   trail_distance_points: 5
+2025-08-05 15:28:59,455 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:28:59,456 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:28:59,456 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:28:59,456 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:28:59,457 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:28:59,457 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:28:59,457 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:28:59,458 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:28:59,458 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:28:59,458 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:28:59,459 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:28:59,459 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:29:00,953 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:29:00,957 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:29:00,961 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:29:00,963 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:29:00,964 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:29:00,965 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:29:00,966 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:29:00,973 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:00,976 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:00,984 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:00,987 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:00,991 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:00,993 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:00,998 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,001 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,014 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,034 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,050 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,059 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,067 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,080 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,083 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,105 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,134 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:01,165 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:29:01,412 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:29:01,414 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:29:01,417 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:29:01,420 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:29:01,422 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:29:01,426 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:29:01,432 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:29:01,438 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:29:01,443 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:29:01,474 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:01,475 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,476 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:29:01,477 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:01,477 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:01,478 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:29:01,478 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:29:01,481 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,485 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,492 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,494 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,495 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,498 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,509 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,512 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:01,513 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:25,729 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:25,730 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:29:25,730 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:25,731 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:29:25,731 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:29:25,731 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:29:25,732 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:29:25,732 - backtest.backtest_runner - INFO - 
+2025-08-05 15:29:25,732 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:29:25,733 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:29:25,733 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:29:25,733 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:29:25,734 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:29:25,734 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:29:25,734 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:29:25,735 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:29:25,735 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:29:25,736 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:29:25,737 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:25,737 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:29:25,747 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:25,748 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:29:25,749 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:25,755 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:29:25,755 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:29:25,756 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:29:25,756 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:29:25,757 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:29:25,757 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:29:25,757 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:29:25,758 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:29:25,758 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:29:25,759 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:29:25,759 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:29:25,761 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:29:25,761 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:29:25,761 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:29:25,762 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:29:25,762 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:29:25,765 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:29:25,765 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:29:25,766 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:29:25,767 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:29:25,767 - backtest.backtest_runner - INFO -   trail_activation_points: 5
+2025-08-05 15:29:25,767 - backtest.backtest_runner - INFO -   trail_distance_points: 7
+2025-08-05 15:29:25,768 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:29:25,772 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:29:25,772 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:29:25,773 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:29:25,773 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:29:25,774 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:29:25,774 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:29:25,775 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:29:25,775 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:29:25,776 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:29:25,777 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:29:25,779 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:29:27,299 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:29:27,302 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:29:27,305 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:29:27,305 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:29:27,309 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:29:27,310 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:29:27,311 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:29:27,322 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,325 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,328 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,332 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,335 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,338 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,343 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,350 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,352 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,354 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,359 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,365 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,367 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,370 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,374 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,376 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,382 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:27,384 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:29:27,404 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:29:27,405 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:29:27,407 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:29:27,411 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:29:27,412 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:29:27,412 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:29:27,413 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:29:27,416 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:29:27,419 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:29:27,445 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:27,446 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,447 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:29:27,447 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:27,448 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:27,448 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:29:27,448 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:29:27,450 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,451 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,453 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,455 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,456 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,461 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,464 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,471 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:27,472 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:53,936 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:53,936 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:29:53,937 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:53,937 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:29:53,938 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:29:53,938 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:29:53,938 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:29:53,939 - backtest.backtest_runner - INFO - 
+2025-08-05 15:29:53,939 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:29:53,939 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:29:53,940 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:29:53,940 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:29:53,941 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:29:53,944 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:29:53,945 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:29:53,959 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:29:53,973 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:29:53,975 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:29:53,975 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:53,976 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:29:53,980 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:53,988 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:29:53,989 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:29:53,990 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:29:53,990 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:29:53,991 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:29:53,991 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:29:53,992 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:29:53,995 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:29:53,996 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:29:53,996 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:29:53,997 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:29:53,998 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:29:53,998 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:29:53,998 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:29:53,999 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:29:53,999 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:29:54,000 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:29:54,000 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:29:54,000 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:29:54,001 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:29:54,007 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:29:54,008 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:29:54,009 - backtest.backtest_runner - INFO -   trail_activation_points: 5
+2025-08-05 15:29:54,009 - backtest.backtest_runner - INFO -   trail_distance_points: 12
+2025-08-05 15:29:54,010 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:29:54,010 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:29:54,010 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:29:54,011 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:29:54,011 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:29:54,011 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:29:54,012 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:29:54,012 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:29:54,013 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:29:54,015 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:29:54,016 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:29:54,016 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:29:56,089 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:29:56,097 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:29:56,110 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:29:56,110 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:29:56,112 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:29:56,113 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:29:56,114 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:29:56,121 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,135 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,138 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,151 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,154 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,157 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,161 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,167 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,172 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,174 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,178 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,181 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,191 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,193 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,196 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,199 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,202 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:29:56,207 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:29:56,235 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:29:56,236 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:29:56,240 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:29:56,251 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:29:56,252 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:29:56,256 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:29:56,256 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:29:56,260 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:29:56,266 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:29:56,294 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:56,295 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,296 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:29:56,296 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:56,297 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:29:56,297 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:29:56,297 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:29:56,299 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,300 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,303 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,307 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,310 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,312 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,314 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,317 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:29:56,319 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:36,062 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:30:36,063 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:30:36,063 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:30:36,064 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:30:36,064 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:30:36,065 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:30:36,065 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:30:36,066 - backtest.backtest_runner - INFO - 
+2025-08-05 15:30:36,067 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:30:36,068 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:30:36,068 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:30:36,127 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:30:36,131 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:30:36,132 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:30:36,133 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:30:36,138 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:30:36,139 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:30:36,139 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:30:36,140 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:30:36,141 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:30:36,147 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:30:36,148 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:30:36,148 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:30:36,149 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:30:36,149 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:30:36,155 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:30:36,157 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:30:36,157 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:30:36,157 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:30:36,157 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:30:36,158 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:30:36,158 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:30:36,158 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:30:36,158 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:30:36,159 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:30:36,159 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:30:36,159 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:30:36,159 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:30:36,160 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:30:36,161 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:30:36,161 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:30:36,162 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:30:36,162 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:30:36,162 - backtest.backtest_runner - INFO -   trail_activation_points: 7
+2025-08-05 15:30:36,163 - backtest.backtest_runner - INFO -   trail_distance_points: 5
+2025-08-05 15:30:36,163 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:30:36,163 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:30:36,163 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:30:36,164 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:30:36,164 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:30:36,164 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:30:36,164 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:30:36,165 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:30:36,167 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:30:36,167 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:30:36,168 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:30:36,168 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:30:42,766 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:30:42,973 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:30:43,277 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:30:43,480 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:30:43,635 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:30:43,754 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:30:43,784 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:30:43,796 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,809 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,815 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,818 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,824 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,827 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,834 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,968 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:43,998 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,012 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,015 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,018 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,030 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,033 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,037 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,050 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,052 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:30:44,055 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:30:44,090 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:30:44,090 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:30:44,096 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:30:44,098 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:30:44,100 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:30:44,101 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:30:44,102 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:30:44,108 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:30:44,110 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:30:44,137 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:30:44,137 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,138 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:30:44,138 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:30:44,139 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:30:44,139 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:30:44,139 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:30:44,141 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,142 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,146 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,149 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,152 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,153 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,155 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,157 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:30:44,158 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:09,387 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:09,387 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:31:09,388 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:09,388 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:31:09,389 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:31:09,389 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:31:09,389 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:31:09,390 - backtest.backtest_runner - INFO - 
+2025-08-05 15:31:09,390 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:31:09,391 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:31:09,391 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:31:09,391 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:31:09,392 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:31:09,392 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:31:09,392 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:31:09,393 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:31:09,394 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:31:09,395 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:31:09,397 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:09,403 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:31:09,408 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:09,409 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:31:09,409 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:09,410 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:31:09,412 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:31:09,412 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:31:09,413 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:31:09,413 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:31:09,414 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:31:09,414 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:31:09,414 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:31:09,415 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:31:09,420 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:31:09,421 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:31:09,421 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:31:09,422 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:31:09,422 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:31:09,422 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:31:09,423 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:31:09,423 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:31:09,423 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:31:09,424 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:31:09,425 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:31:09,425 - backtest.backtest_runner - INFO -   trail_activation_points: 7
+2025-08-05 15:31:09,426 - backtest.backtest_runner - INFO -   trail_distance_points: 7
+2025-08-05 15:31:09,426 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:31:09,426 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:31:09,427 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:31:09,427 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:31:09,427 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:31:09,428 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:31:09,428 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:31:09,430 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:31:09,431 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:31:09,432 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:31:09,432 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:31:09,433 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:31:11,168 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:31:11,172 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:31:11,176 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:31:11,177 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:31:11,181 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:31:11,182 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:31:11,184 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:31:11,186 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,188 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,193 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,197 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,200 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,205 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,208 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,210 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,216 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,219 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,221 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,224 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,227 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,229 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,237 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,239 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,242 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:11,245 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:31:11,288 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:31:11,290 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:31:11,301 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:31:11,303 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:31:11,304 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:31:11,304 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:31:11,305 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:31:11,310 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:31:11,312 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:31:11,345 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:31:11,346 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,347 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:31:11,347 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:31:11,347 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:31:11,348 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:31:11,348 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:31:11,349 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,351 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,354 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,359 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,360 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,362 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,363 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,365 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:11,367 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:34,473 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:34,473 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:31:34,474 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:34,474 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:31:34,475 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:31:34,475 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:31:34,475 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:31:34,476 - backtest.backtest_runner - INFO - 
+2025-08-05 15:31:34,476 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:31:34,476 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:31:34,477 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:31:34,477 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:31:34,478 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:31:34,478 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:31:34,480 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:31:34,482 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:31:34,482 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:31:34,482 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:31:34,484 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:34,485 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:31:34,494 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:34,495 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:31:34,495 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:34,496 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:31:34,496 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:31:34,497 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:31:34,497 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:31:34,498 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:31:34,498 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:31:34,498 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:31:34,499 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:31:34,500 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:31:34,501 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:31:34,501 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:31:34,501 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:31:34,502 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:31:34,502 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:31:34,502 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:31:34,503 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:31:34,503 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:31:34,504 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:31:34,504 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:31:34,505 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:31:34,506 - backtest.backtest_runner - INFO -   trail_activation_points: 7
+2025-08-05 15:31:34,507 - backtest.backtest_runner - INFO -   trail_distance_points: 12
+2025-08-05 15:31:34,510 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:31:34,510 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:31:34,511 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:31:34,511 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:31:34,512 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:31:34,512 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:31:34,512 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:31:34,513 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:31:34,513 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:31:34,514 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:31:34,514 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:31:34,515 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:31:36,142 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:31:36,148 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:31:36,152 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:31:36,152 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:31:36,153 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:31:36,153 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:31:36,155 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:31:36,157 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,160 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,164 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,169 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,173 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,176 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,179 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,182 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,188 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,190 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,194 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,196 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,199 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,209 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,212 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,214 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,216 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:31:36,220 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:31:36,239 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:31:36,241 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:31:36,245 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:31:36,249 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:31:36,249 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:31:36,250 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:31:36,251 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:31:36,254 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:31:36,255 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:31:36,281 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:31:36,283 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,285 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:31:36,286 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:31:36,286 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:31:36,287 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:31:36,288 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:31:36,290 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,292 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,294 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,295 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,297 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,298 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,301 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,303 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:36,306 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:31:59,512 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:59,513 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:31:59,513 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:59,514 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:31:59,514 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:31:59,514 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:31:59,515 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:31:59,515 - backtest.backtest_runner - INFO - 
+2025-08-05 15:31:59,516 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:31:59,516 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:31:59,516 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:31:59,517 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:31:59,517 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:31:59,517 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:31:59,518 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:31:59,520 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:31:59,521 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:31:59,522 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:31:59,522 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:59,523 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:31:59,527 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:59,528 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:31:59,529 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:31:59,530 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:31:59,530 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:31:59,531 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:31:59,531 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:31:59,531 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:31:59,532 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:31:59,532 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:31:59,532 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:31:59,533 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:31:59,533 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:31:59,534 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:31:59,535 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:31:59,535 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:31:59,535 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:31:59,537 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:31:59,539 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:31:59,540 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:31:59,541 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:31:59,541 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:31:59,541 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:31:59,542 - backtest.backtest_runner - INFO -   trail_activation_points: 10
+2025-08-05 15:31:59,542 - backtest.backtest_runner - INFO -   trail_distance_points: 5
+2025-08-05 15:31:59,542 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:31:59,543 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:31:59,543 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:31:59,544 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:31:59,544 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:31:59,544 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:31:59,545 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:31:59,546 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:31:59,547 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:31:59,547 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:31:59,548 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:31:59,548 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:32:01,160 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:32:01,164 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:32:01,167 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:32:01,168 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:32:01,169 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:32:01,169 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:32:01,170 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:32:01,175 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,179 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,181 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,184 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,187 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,189 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,195 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,198 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,200 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,205 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,208 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,211 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,218 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,221 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,224 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,227 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,229 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:01,235 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:32:01,253 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:32:01,255 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:32:01,259 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:32:01,263 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:32:01,264 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:32:01,265 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:32:01,265 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:32:01,268 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:32:01,270 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:32:01,299 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:01,300 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,301 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:32:01,301 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:01,301 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:01,302 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:32:01,302 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:32:01,304 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,305 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,308 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,309 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,311 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,317 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,319 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,321 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:01,322 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:24,664 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:24,665 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:32:24,665 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:24,666 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:32:24,666 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:32:24,666 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:32:24,667 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:32:24,667 - backtest.backtest_runner - INFO - 
+2025-08-05 15:32:24,668 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:32:24,668 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:32:24,668 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:32:24,669 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:32:24,669 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:32:24,669 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:32:24,670 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:32:24,670 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:32:24,672 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:32:24,673 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:32:24,674 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:24,675 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:32:24,679 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:24,680 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:32:24,681 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:24,682 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:32:24,683 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:32:24,683 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:32:24,684 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:32:24,684 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:32:24,684 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:32:24,685 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:32:24,685 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:32:24,685 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:32:24,689 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:32:24,690 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:32:24,690 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:32:24,691 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:32:24,692 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:32:24,692 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:32:24,692 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:32:24,693 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:32:24,693 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:32:24,693 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:32:24,694 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:32:24,694 - backtest.backtest_runner - INFO -   trail_activation_points: 10
+2025-08-05 15:32:24,694 - backtest.backtest_runner - INFO -   trail_distance_points: 7
+2025-08-05 15:32:24,695 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:32:24,695 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:32:24,696 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:32:24,697 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:32:24,697 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:32:24,697 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:32:24,698 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:32:24,698 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:32:24,699 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:32:24,699 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:32:24,700 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:32:24,700 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:32:26,270 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:32:26,274 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:32:26,278 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:32:26,280 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:32:26,280 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:32:26,281 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:32:26,282 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:32:26,285 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,291 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,294 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,296 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,300 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,303 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,308 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,311 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,313 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,317 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,319 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,325 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,328 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,330 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,334 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,336 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,339 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:26,343 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:32:26,368 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:32:26,368 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:32:26,371 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:32:26,375 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:32:26,375 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:32:26,376 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:32:26,377 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:32:26,380 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:32:26,383 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:32:26,436 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:26,437 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,437 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:32:26,437 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:26,438 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:26,438 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:32:26,439 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:32:26,440 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,441 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,447 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,450 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,452 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,453 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,456 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,458 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:26,459 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:50,417 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:50,417 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:32:50,418 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:50,418 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:32:50,419 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:32:50,419 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:32:50,419 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:32:50,420 - backtest.backtest_runner - INFO - 
+2025-08-05 15:32:50,420 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:32:50,420 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:32:50,420 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:32:50,421 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:32:50,421 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:32:50,421 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:32:50,421 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:32:50,422 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:32:50,423 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:32:50,425 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:32:50,426 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:50,426 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:32:50,431 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:50,431 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:32:50,432 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:32:50,432 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:32:50,433 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:32:50,433 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:32:50,433 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:32:50,434 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:32:50,434 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:32:50,434 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:32:50,435 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:32:50,436 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:32:50,436 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:32:50,436 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:32:50,437 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:32:50,437 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:32:50,437 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:32:50,437 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:32:50,438 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:32:50,438 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:32:50,438 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:32:50,439 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:32:50,439 - backtest.backtest_runner - INFO -   base_sl_points: 7
+2025-08-05 15:32:50,440 - backtest.backtest_runner - INFO -   trail_activation_points: 10
+2025-08-05 15:32:50,440 - backtest.backtest_runner - INFO -   trail_distance_points: 12
+2025-08-05 15:32:50,441 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:32:50,442 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:32:50,442 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:32:50,442 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:32:50,443 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:32:50,443 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:32:50,444 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:32:50,444 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:32:50,445 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:32:50,446 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:32:50,446 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:32:50,447 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:32:51,955 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:32:51,958 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:32:51,961 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:32:51,961 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:32:51,968 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:32:51,969 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:32:51,970 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:32:51,972 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,975 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,977 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,982 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,985 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,987 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,989 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,992 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,995 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:51,997 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,003 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,005 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,007 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,011 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,013 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,015 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,020 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:32:52,023 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:32:52,043 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:32:52,044 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:32:52,048 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:32:52,049 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:32:52,050 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:32:52,052 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:32:52,053 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:32:52,055 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:32:52,058 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:32:52,083 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:52,084 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,085 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:32:52,086 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:52,086 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:32:52,087 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:32:52,087 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:32:52,089 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,091 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,092 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,093 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,096 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,097 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,098 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,104 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:32:52,106 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:15,539 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:15,539 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:33:15,540 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:15,540 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:33:15,540 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:33:15,541 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:33:15,541 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:33:15,542 - backtest.backtest_runner - INFO - 
+2025-08-05 15:33:15,542 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:33:15,542 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:33:15,543 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:33:15,543 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:33:15,543 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:33:15,544 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:33:15,544 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:33:15,545 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:33:15,547 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:33:15,548 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:33:15,548 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:15,548 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:33:15,553 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:15,554 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:33:15,555 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:15,558 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:33:15,559 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:33:15,560 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:33:15,560 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:33:15,560 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:33:15,561 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:33:15,561 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:33:15,561 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:33:15,561 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:33:15,562 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:33:15,562 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:33:15,562 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:33:15,562 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:33:15,562 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:33:15,563 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:33:15,563 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:33:15,563 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:33:15,563 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:33:15,564 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:33:15,564 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:33:15,565 - backtest.backtest_runner - INFO -   trail_activation_points: 5
+2025-08-05 15:33:15,565 - backtest.backtest_runner - INFO -   trail_distance_points: 5
+2025-08-05 15:33:15,566 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:33:15,566 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:33:15,566 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:33:15,566 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:33:15,567 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:33:15,567 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:33:15,567 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:33:15,568 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:33:15,568 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:33:15,568 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:33:15,568 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:33:15,569 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:33:17,180 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:33:17,183 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:33:17,185 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:33:17,186 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:33:17,188 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:33:17,190 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:33:17,192 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:33:17,195 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,197 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,199 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,202 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,206 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,208 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,214 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,217 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,219 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,223 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,225 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,228 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,234 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,237 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,239 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,241 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,244 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:17,247 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:33:17,269 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:33:17,269 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:33:17,276 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:33:17,278 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:33:17,278 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:33:17,279 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:33:17,279 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:33:17,282 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:33:17,285 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:33:17,308 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:33:17,310 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,310 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:33:17,311 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:33:17,313 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:33:17,315 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:33:17,316 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:33:17,318 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,319 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,321 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,323 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,325 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,327 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,328 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,330 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:17,334 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:40,849 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:40,850 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:33:40,850 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:40,851 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:33:40,851 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:33:40,852 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:33:40,852 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:33:40,852 - backtest.backtest_runner - INFO - 
+2025-08-05 15:33:40,853 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:33:40,853 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:33:40,853 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:33:40,854 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:33:40,854 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:33:40,855 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:33:40,855 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:33:40,856 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:33:40,857 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:33:40,859 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:33:40,859 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:40,861 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:33:40,865 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:40,866 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:33:40,867 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:33:40,869 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:33:40,870 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:33:40,872 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:33:40,872 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:33:40,873 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:33:40,873 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:33:40,873 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:33:40,873 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:33:40,874 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:33:40,874 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:33:40,874 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:33:40,874 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:33:40,875 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:33:40,875 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:33:40,876 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:33:40,876 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:33:40,876 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:33:40,876 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:33:40,877 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:33:40,877 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:33:40,877 - backtest.backtest_runner - INFO -   trail_activation_points: 5
+2025-08-05 15:33:40,877 - backtest.backtest_runner - INFO -   trail_distance_points: 7
+2025-08-05 15:33:40,878 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:33:40,878 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:33:40,878 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:33:40,878 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:33:40,879 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:33:40,879 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:33:40,879 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:33:40,880 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:33:40,881 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:33:40,882 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:33:40,882 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:33:40,883 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:33:42,405 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:33:42,415 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:33:42,425 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:33:42,425 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:33:42,429 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:33:42,430 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:33:42,432 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:33:42,434 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,436 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,439 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,442 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,447 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,449 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,451 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,453 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,457 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,459 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,464 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,467 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,469 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,472 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,474 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,477 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,480 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:33:42,485 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:33:42,506 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:33:42,506 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:33:42,509 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:33:42,512 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:33:42,513 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:33:42,513 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:33:42,514 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:33:42,517 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:33:42,518 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:33:42,550 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:33:42,551 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,551 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:33:42,551 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:33:42,552 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:33:42,552 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:33:42,552 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:33:42,554 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,555 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,557 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,559 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,560 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,564 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,567 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,569 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:33:42,571 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:07,194 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:07,194 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:34:07,195 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:07,195 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:34:07,196 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:34:07,196 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:34:07,196 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:34:07,197 - backtest.backtest_runner - INFO - 
+2025-08-05 15:34:07,197 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:34:07,197 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:34:07,198 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:34:07,198 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:34:07,198 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:34:07,199 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:34:07,199 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:34:07,201 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:34:07,201 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:34:07,202 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:34:07,207 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:07,208 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:34:07,213 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:07,215 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:34:07,216 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:07,217 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:34:07,217 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:34:07,217 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:34:07,218 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:34:07,218 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:34:07,218 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:34:07,219 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:34:07,219 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:34:07,219 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:34:07,220 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:34:07,220 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:34:07,221 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:34:07,221 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:34:07,222 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:34:07,222 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:34:07,222 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:34:07,223 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:34:07,223 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:34:07,223 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:34:07,224 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:34:07,224 - backtest.backtest_runner - INFO -   trail_activation_points: 5
+2025-08-05 15:34:07,224 - backtest.backtest_runner - INFO -   trail_distance_points: 12
+2025-08-05 15:34:07,225 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:34:07,225 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:34:07,226 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:34:07,226 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:34:07,227 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:34:07,227 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:34:07,227 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:34:07,228 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:34:07,228 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:34:07,229 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:34:07,232 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:34:07,233 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:34:08,831 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:34:08,839 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:34:08,843 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:34:08,845 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:34:08,848 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:34:08,848 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:34:08,850 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:34:08,852 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,854 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,858 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,860 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,863 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,869 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,872 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,874 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,876 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,880 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,883 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,889 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,892 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,894 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,896 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,899 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,902 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:08,904 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:34:08,924 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:34:08,924 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:34:08,933 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:34:08,935 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:34:08,936 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:34:08,937 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:34:08,937 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:34:08,940 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:34:08,944 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:34:08,982 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:34:08,982 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:08,983 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:34:08,983 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:34:08,984 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:34:08,984 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:34:08,984 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:34:08,993 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:08,996 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:08,997 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:08,999 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:09,001 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:09,003 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:09,004 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:09,008 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:09,014 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:48,048 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:48,049 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:34:48,049 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:48,050 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:34:48,050 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:34:48,050 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:34:48,051 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:34:48,051 - backtest.backtest_runner - INFO - 
+2025-08-05 15:34:48,052 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:34:48,052 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:34:48,053 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:34:48,053 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:34:48,053 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:34:48,054 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:34:48,055 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:34:48,056 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:34:48,056 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:34:48,056 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:34:48,057 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:48,057 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:34:48,061 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:48,063 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:34:48,064 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:34:48,065 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:34:48,066 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:34:48,067 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:34:48,068 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:34:48,068 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:34:48,069 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:34:48,069 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:34:48,069 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:34:48,070 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:34:48,070 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:34:48,071 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:34:48,071 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:34:48,071 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:34:48,072 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:34:48,073 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:34:48,073 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:34:48,073 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:34:48,074 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:34:48,074 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:34:48,074 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:34:48,074 - backtest.backtest_runner - INFO -   trail_activation_points: 7
+2025-08-05 15:34:48,075 - backtest.backtest_runner - INFO -   trail_distance_points: 5
+2025-08-05 15:34:48,075 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:34:48,075 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:34:48,075 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:34:48,076 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:34:48,076 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:34:48,076 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:34:48,076 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:34:48,077 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:34:48,078 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:34:48,079 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:34:48,079 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:34:48,079 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:34:49,638 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:34:49,643 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:34:49,646 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:34:49,646 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:34:49,647 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:34:49,647 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:34:49,648 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:34:49,650 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,653 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,655 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,658 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,662 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,664 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,666 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,669 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,671 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,673 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,675 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,679 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,682 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,685 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,687 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,689 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,692 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:34:49,695 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:34:49,730 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:34:49,730 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:34:49,734 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:34:49,740 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:34:49,741 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:34:49,742 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:34:49,743 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:34:49,747 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:34:49,748 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:34:49,770 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:34:49,771 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,772 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:34:49,772 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:34:49,773 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:34:49,773 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:34:49,773 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:34:49,775 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,776 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,779 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,781 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,783 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,785 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,787 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,788 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:34:49,791 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:13,437 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:13,437 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:35:13,438 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:13,438 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:35:13,439 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:35:13,439 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:35:13,439 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:35:13,440 - backtest.backtest_runner - INFO - 
+2025-08-05 15:35:13,440 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:35:13,441 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:35:13,441 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:35:13,441 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:35:13,442 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:35:13,443 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:35:13,444 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:35:13,444 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:35:13,445 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:35:13,445 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:35:13,445 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:13,446 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:35:13,450 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:13,451 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:35:13,452 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:13,452 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:35:13,453 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:35:13,453 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:35:13,454 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:35:13,454 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:35:13,454 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:35:13,455 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:35:13,456 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:35:13,456 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:35:13,457 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:35:13,457 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:35:13,457 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:35:13,458 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:35:13,458 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:35:13,459 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:35:13,459 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:35:13,459 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:35:13,460 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:35:13,461 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:35:13,461 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:35:13,461 - backtest.backtest_runner - INFO -   trail_activation_points: 7
+2025-08-05 15:35:13,462 - backtest.backtest_runner - INFO -   trail_distance_points: 7
+2025-08-05 15:35:13,462 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:35:13,462 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:35:13,463 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:35:13,463 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:35:13,464 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:35:13,464 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:35:13,464 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:35:13,465 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:35:13,467 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:35:13,468 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:35:13,469 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:35:13,469 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:35:14,977 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:35:14,981 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:35:14,983 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:35:14,983 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:35:14,985 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:35:14,986 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:35:14,986 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:35:14,989 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:14,992 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:14,994 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:14,996 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:14,999 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,002 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,004 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,007 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,009 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,011 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,014 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,017 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,019 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,021 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,024 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,026 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,028 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:15,031 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:35:15,046 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:35:15,047 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:35:15,050 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:35:15,053 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:35:15,054 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:35:15,055 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:35:15,055 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:35:15,058 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:35:15,061 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:35:15,084 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:35:15,085 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,085 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:35:15,086 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:35:15,086 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:35:15,086 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:35:15,087 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:35:15,088 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,091 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,093 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,096 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,097 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,099 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,101 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,103 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:15,105 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:37,991 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:37,992 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:35:37,992 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:37,993 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:35:37,993 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:35:37,994 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:35:37,994 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:35:37,995 - backtest.backtest_runner - INFO - 
+2025-08-05 15:35:37,995 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:35:37,995 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:35:37,996 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:35:37,996 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:35:37,997 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:35:37,997 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:35:37,999 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:35:37,999 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:35:37,999 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:35:38,000 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:35:38,000 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:38,001 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:35:38,004 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:38,006 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:35:38,006 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:35:38,007 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:35:38,008 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:35:38,009 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:35:38,009 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:35:38,010 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:35:38,010 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:35:38,011 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:35:38,012 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:35:38,012 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:35:38,013 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:35:38,013 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:35:38,013 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:35:38,014 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:35:38,014 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:35:38,014 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:35:38,015 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:35:38,015 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:35:38,016 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:35:38,017 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:35:38,017 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:35:38,017 - backtest.backtest_runner - INFO -   trail_activation_points: 7
+2025-08-05 15:35:38,018 - backtest.backtest_runner - INFO -   trail_distance_points: 12
+2025-08-05 15:35:38,018 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:35:38,018 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:35:38,019 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:35:38,019 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:35:38,020 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:35:38,020 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:35:38,020 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:35:38,021 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:35:38,022 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:35:38,023 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:35:38,025 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:35:38,026 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:35:39,551 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:35:39,556 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:35:39,559 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:35:39,559 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:35:39,560 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:35:39,560 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:35:39,561 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:35:39,563 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,567 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,569 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,571 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,574 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,577 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,579 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,582 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,585 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,587 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,590 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,592 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,594 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,597 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,600 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,602 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,604 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:35:39,606 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:35:39,741 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:35:39,761 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:35:39,769 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:35:39,775 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:35:39,777 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:35:39,785 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:35:39,796 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:35:39,813 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:35:39,815 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:35:39,879 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:35:39,899 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,900 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:35:39,905 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:35:39,906 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:35:39,907 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:35:39,907 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:35:39,909 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,912 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,915 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,918 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,922 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,924 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,927 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,929 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:35:39,931 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:05,866 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:05,866 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:36:05,867 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:05,867 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:36:05,868 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:36:05,868 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:36:05,868 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:36:05,869 - backtest.backtest_runner - INFO - 
+2025-08-05 15:36:05,869 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:36:05,869 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:36:05,870 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:36:05,870 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:36:05,870 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:36:05,871 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:36:05,871 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:36:05,872 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:36:05,873 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:36:05,873 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:36:05,873 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:05,874 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:36:05,877 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:05,879 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:36:05,880 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:05,880 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:36:05,881 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:36:05,881 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:36:05,882 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:36:05,882 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:36:05,882 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:36:05,883 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:36:05,883 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:36:05,883 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:36:05,884 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:36:05,885 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:36:05,887 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:36:05,888 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:36:05,888 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:36:05,888 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:36:05,889 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:36:05,889 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:36:05,890 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:36:05,890 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:36:05,890 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:36:05,891 - backtest.backtest_runner - INFO -   trail_activation_points: 10
+2025-08-05 15:36:05,891 - backtest.backtest_runner - INFO -   trail_distance_points: 5
+2025-08-05 15:36:05,891 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:36:05,891 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:36:05,892 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:36:05,892 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:36:05,892 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:36:05,892 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:36:05,893 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:36:05,893 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:36:05,894 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:36:05,895 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:36:05,895 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:36:05,896 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:36:07,391 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:36:07,395 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:36:07,397 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:36:07,397 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:36:07,399 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:36:07,399 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:36:07,400 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:36:07,402 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,405 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,407 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,409 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,412 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,415 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,417 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,420 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,422 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,424 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,427 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,430 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,432 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,435 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,437 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,439 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,442 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:07,445 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:36:07,480 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:36:07,480 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:36:07,485 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:36:07,487 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:36:07,487 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:36:07,488 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:36:07,489 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:36:07,492 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:36:07,494 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:36:07,516 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:07,517 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,517 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:36:07,518 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:07,518 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:07,519 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:36:07,519 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:36:07,520 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,522 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,524 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,526 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,527 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,529 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,530 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,533 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:07,534 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:30,477 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:30,478 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:36:30,478 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:30,479 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:36:30,479 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:36:30,480 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:36:30,480 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:36:30,481 - backtest.backtest_runner - INFO - 
+2025-08-05 15:36:30,481 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:36:30,481 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:36:30,482 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:36:30,482 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:36:30,483 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:36:30,484 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:36:30,485 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:36:30,485 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:36:30,486 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:36:30,486 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:36:30,486 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:30,487 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:36:30,490 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:30,492 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:36:30,492 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:30,493 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:36:30,494 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:36:30,494 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:36:30,495 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:36:30,495 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:36:30,495 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:36:30,496 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:36:30,497 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:36:30,498 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:36:30,498 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:36:30,498 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:36:30,499 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:36:30,499 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:36:30,499 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:36:30,500 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:36:30,500 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:36:30,501 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:36:30,501 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:36:30,502 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:36:30,502 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:36:30,502 - backtest.backtest_runner - INFO -   trail_activation_points: 10
+2025-08-05 15:36:30,503 - backtest.backtest_runner - INFO -   trail_distance_points: 7
+2025-08-05 15:36:30,503 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:36:30,504 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:36:30,504 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:36:30,504 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:36:30,505 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:36:30,505 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:36:30,507 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:36:30,508 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:36:30,509 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:36:30,509 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:36:30,510 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:36:30,510 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:36:32,007 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:36:32,011 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:36:32,013 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:36:32,013 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:36:32,015 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:36:32,015 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:36:32,016 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:36:32,018 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,022 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,024 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,026 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,028 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,032 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,034 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,037 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,039 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,042 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,045 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,047 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,049 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,053 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,055 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,057 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,060 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:32,063 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:36:32,077 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:36:32,078 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:36:32,081 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:36:32,086 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:36:32,087 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:36:32,089 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:36:32,089 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:36:32,093 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:36:32,095 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:36:32,116 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:32,118 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,118 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:36:32,118 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:32,119 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:32,119 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:36:32,120 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:36:32,121 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,124 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,125 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,127 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,129 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,130 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,132 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,134 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:32,135 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:57,451 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:57,451 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:36:57,459 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:57,460 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:36:57,461 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:36:57,461 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:36:57,462 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:36:57,462 - backtest.backtest_runner - INFO - 
+2025-08-05 15:36:57,463 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:36:57,463 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:36:57,464 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:36:57,464 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:36:57,467 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:36:57,468 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:36:57,468 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:36:57,469 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:36:57,469 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:36:57,470 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:36:57,470 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:57,471 - backtest.backtest_runner - WARNING - No trades executed during backtest
+2025-08-05 15:36:57,478 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:57,478 - backtest.backtest_runner - INFO - STARTING BACKTEST WITH NORMALIZED DATA PIPELINE
+2025-08-05 15:36:57,479 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:36:57,480 - core.researchStrategy - INFO - Strategy initialized: Modular Intraday Long-Only Strategy v3.0
+2025-08-05 15:36:57,481 - core.researchStrategy - INFO - Indicators enabled: EMA=True, MACD=True, VWAP=True, HTF=True, RSI=False
+2025-08-05 15:36:57,482 - backtest.backtest_runner - INFO - === POSITION MANAGER CONFIG DIAGNOSTIC ===
+2025-08-05 15:36:57,482 - backtest.backtest_runner - INFO -   strategy_version: research
+2025-08-05 15:36:57,484 - backtest.backtest_runner - INFO -   use_ema_crossover: True
+2025-08-05 15:36:57,485 - backtest.backtest_runner - INFO -   use_vwap: True
+2025-08-05 15:36:57,485 - backtest.backtest_runner - INFO -   use_macd: False
+2025-08-05 15:36:57,486 - backtest.backtest_runner - INFO -   use_rsi_filter: False
+2025-08-05 15:36:57,487 - backtest.backtest_runner - INFO -   use_htf_trend: False
+2025-08-05 15:36:57,489 - backtest.backtest_runner - INFO -   use_bollinger_bands: False
+2025-08-05 15:36:57,490 - backtest.backtest_runner - INFO -   use_stochastic: False
+2025-08-05 15:36:57,490 - backtest.backtest_runner - INFO -   fast_ema: 9
+2025-08-05 15:36:57,491 - backtest.backtest_runner - INFO -   slow_ema: 21
+2025-08-05 15:36:57,492 - backtest.backtest_runner - INFO -   ema_points_threshold: 0
+2025-08-05 15:36:57,492 - backtest.backtest_runner - INFO -   use_trail_stop: True
+2025-08-05 15:36:57,493 - backtest.backtest_runner - INFO -   tp_points: [10, 25, 50, 100]
+2025-08-05 15:36:57,493 - backtest.backtest_runner - INFO -   tp_percents: [0.25, 0.25, 0.25, 0.25]
+2025-08-05 15:36:57,495 - backtest.backtest_runner - INFO -   risk_per_trade_percent: 1.0
+2025-08-05 15:36:57,496 - backtest.backtest_runner - INFO -   commission_percent: 0.1
+2025-08-05 15:36:57,497 - backtest.backtest_runner - INFO -   base_sl_points: 12
+2025-08-05 15:36:57,497 - backtest.backtest_runner - INFO -   trail_activation_points: 10
+2025-08-05 15:36:57,497 - backtest.backtest_runner - INFO -   trail_distance_points: 12
+2025-08-05 15:36:57,498 - backtest.backtest_runner - INFO -   symbol: NIFTY
+2025-08-05 15:36:57,498 - backtest.backtest_runner - INFO -   exchange: NSE_FO
+2025-08-05 15:36:57,499 - backtest.backtest_runner - INFO -   lot_size: 50
+2025-08-05 15:36:57,499 - backtest.backtest_runner - INFO -   tick_size: 0.05
+2025-08-05 15:36:57,499 - backtest.backtest_runner - INFO -   product_type: INTRADAY
+2025-08-05 15:36:57,500 - backtest.backtest_runner - INFO -   initial_capital: 100000
+2025-08-05 15:36:57,500 - backtest.backtest_runner - INFO -   session: {'intraday_start_hour': 9, 'intraday_start_min': 15, 'intraday_end_hour': 15, 'intraday_end_min': 30, 'exit_before_close': 20, 'timezone': 'Asia/Kolkata'}
+2025-08-05 15:36:57,503 - backtest.backtest_runner - INFO - All critical PositionManager parameters present
+2025-08-05 15:36:57,504 - core.position_manager - INFO - PositionManager initialized with capital: 100,000
+2025-08-05 15:36:57,505 - backtest.backtest_runner - INFO - Loading data with centralized loader...
+2025-08-05 15:36:57,506 - backtest.backtest_runner - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:36:57,506 - utils.simple_loader - INFO - Loading data from: C:\Users\user\Desktop\data\date-wise\live_ticks_20250721_163044.csv
+2025-08-05 15:36:59,671 - utils.simple_loader - INFO - Processing as tick-by-tick data
+2025-08-05 15:36:59,675 - utils.simple_loader - INFO - Loaded 36151 ticks
+2025-08-05 15:36:59,677 - backtest.backtest_runner - INFO - Loaded and normalized data. Shape: (36151, 6). Time range: 2025-07-21 09:18:04+05:30 to 2025-07-21 15:30:01+05:30
+2025-08-05 15:36:59,678 - backtest.backtest_runner - INFO - Optimizing memory usage for large tick dataset (36151 ticks)
+2025-08-05 15:36:59,679 - backtest.backtest_runner - INFO - Processing 36151 rows in chunks of 2000
+2025-08-05 15:36:59,679 - backtest.backtest_runner - INFO - Starting chunk-based indicator processing...
+2025-08-05 15:36:59,680 - core.indicators - INFO - Validating data quality for 2000 rows
+2025-08-05 15:36:59,683 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,685 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,688 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,690 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,692 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,696 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,699 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,701 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,704 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,706 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,708 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,711 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,714 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,717 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,721 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,723 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,725 - core.indicators - INFO - Validating data quality for 2050 rows
+2025-08-05 15:36:59,729 - core.indicators - INFO - Validating data quality for 201 rows
+2025-08-05 15:36:59,746 - backtest.backtest_runner - ERROR - Available columns: ['price', 'volume', 'open', 'high', 'low', 'close']
+2025-08-05 15:36:59,747 - backtest.backtest_runner - WARNING - Falling back to non-chunked processing due to missing indicators
+2025-08-05 15:36:59,750 - core.indicators - INFO - Validating data quality for 36151 rows
+2025-08-05 15:36:59,753 - core.indicators - INFO - Using memory-optimized calculations for 36151 rows
+2025-08-05 15:36:59,754 - backtest.backtest_runner - INFO - Chunk processing completed: 36151 rows with indicators
+2025-08-05 15:36:59,755 - backtest.backtest_runner - INFO - Chunk processing completed. Full dataset with indicators: 36151 rows
+2025-08-05 15:36:59,755 - backtest.backtest_runner - INFO - Indicators calculated. Final 5 rows:
+2025-08-05 15:36:59,759 - backtest.backtest_runner - INFO - 
+                           close  volume
+2025-07-21 15:29:58+05:30  79.55      75
+2025-07-21 15:29:59+05:30  78.20     150
+2025-07-21 15:29:59+05:30  78.80      75
+2025-07-21 15:30:00+05:30  78.80      75
+2025-07-21 15:30:01+05:30  78.80      75
+2025-08-05 15:36:59,760 - backtest.backtest_runner - INFO - Starting backtest execution...
+2025-08-05 15:36:59,783 - backtest.backtest_runner - INFO - Processing timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:59,785 - core.researchStrategy - INFO - can_open_long called #1: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,785 - backtest.backtest_runner - INFO - First timestamp processing details:
+2025-08-05 15:36:59,786 - backtest.backtest_runner - INFO -   - Original timestamp: 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:59,786 - backtest.backtest_runner - INFO -   - Normalized 'now': 2025-07-21 09:18:04+05:30 (tzinfo: Asia/Kolkata)
+2025-08-05 15:36:59,787 - backtest.backtest_runner - INFO -   - Session exit check: False
+2025-08-05 15:36:59,787 - backtest.backtest_runner - INFO -   - Session live check: True
+2025-08-05 15:36:59,788 - core.researchStrategy - INFO - can_open_long called #2: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,791 - core.researchStrategy - INFO - can_open_long called #3: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,792 - core.researchStrategy - INFO - can_open_long called #4: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,794 - core.researchStrategy - INFO - can_open_long called #5: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,798 - core.researchStrategy - INFO - can_open_long called #6: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,799 - core.researchStrategy - INFO - can_open_long called #7: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,801 - core.researchStrategy - INFO - can_open_long called #8: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,803 - core.researchStrategy - INFO - can_open_long called #9: can_enter=False, should_enter=False, result=False
+2025-08-05 15:36:59,804 - core.researchStrategy - INFO - can_open_long called #10: can_enter=False, should_enter=False, result=False
+2025-08-05 15:37:26,146 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:37:26,147 - backtest.backtest_runner - INFO - BACKTEST SUMMARY
+2025-08-05 15:37:26,147 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:37:26,148 - backtest.backtest_runner - INFO - Data Quality:
+2025-08-05 15:37:26,148 - backtest.backtest_runner - INFO -   Total input rows: 36151
+2025-08-05 15:37:26,149 - backtest.backtest_runner - INFO -   Processed rows: 36151
+2025-08-05 15:37:26,149 - backtest.backtest_runner - INFO -   Data quality: 100.0%
+2025-08-05 15:37:26,150 - backtest.backtest_runner - INFO - 
+2025-08-05 15:37:26,150 - backtest.backtest_runner - INFO - Trading Performance:
+2025-08-05 15:37:26,150 - backtest.backtest_runner - INFO -   Total Trades: 0
+2025-08-05 15:37:26,151 - backtest.backtest_runner - INFO -   Win Rate: 0.00%
+2025-08-05 15:37:26,151 - backtest.backtest_runner - INFO -   Total P&L: 0.00
+2025-08-05 15:37:26,152 - backtest.backtest_runner - INFO -   Avg Win: 0.00
+2025-08-05 15:37:26,152 - backtest.backtest_runner - INFO -   Avg Loss: 0.00
+2025-08-05 15:37:26,153 - backtest.backtest_runner - INFO -   Profit Factor: 0.00
+2025-08-05 15:37:26,154 - backtest.backtest_runner - INFO -   Max Win: 0.00
+2025-08-05 15:37:26,154 - backtest.backtest_runner - INFO -   Max Loss: 0.00
+2025-08-05 15:37:26,154 - backtest.backtest_runner - INFO -   Total Commission: 0.00
+2025-08-05 15:37:26,155 - backtest.backtest_runner - INFO - ============================================================
+2025-08-05 15:37:26,155 - backtest.backtest_runner - WARNING - No trades executed during backtest

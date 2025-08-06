@@ -133,12 +133,8 @@ class UnifiedTradingGUI(tk.Tk):
         ttk.Label(bt_params_frame, text="Slow EMA:").grid(row=0, column=2, sticky="e", padx=2)
         self.bt_slow_ema = tk.StringVar(value="21")
         ttk.Entry(bt_params_frame, textvariable=self.bt_slow_ema, width=8).grid(row=0, column=3, padx=2)
-        
-        ttk.Label(bt_params_frame, text="EMA Points Threshold:").grid(row=0, column=4, sticky="e", padx=2)
-        self.bt_ema_points_threshold = tk.StringVar(value="2")
-        ttk.Entry(bt_params_frame, textvariable=self.bt_ema_points_threshold, width=8).grid(row=0, column=5, padx=2)
-        
-        # MACD Parameters
+ 
+         # MACD Parameters
         ttk.Label(bt_params_frame, text="MACD Fast:").grid(row=1, column=0, sticky="e", padx=2)
         self.bt_macd_fast = tk.StringVar(value="12")
         ttk.Entry(bt_params_frame, textvariable=self.bt_macd_fast, width=8).grid(row=1, column=1, padx=2)
@@ -359,7 +355,6 @@ class UnifiedTradingGUI(tk.Tk):
                 "use_atr": self.bt_use_atr.get(),
                 "fast_ema": int(self.bt_fast_ema.get()),
                 "slow_ema": int(self.bt_slow_ema.get()),
-                "ema_points_threshold": int(self.bt_ema_points_threshold.get()),
                 "macd_fast": int(self.bt_macd_fast.get()),
                 "macd_slow": int(self.bt_macd_slow.get()),
                 "macd_signal": int(self.bt_macd_signal.get()),
@@ -567,10 +562,6 @@ class UnifiedTradingGUI(tk.Tk):
         ttk.Label(params_frame, text="Slow EMA:").grid(row=0, column=2, sticky="e", padx=2)
         self.ft_slow_ema = tk.StringVar(value="21")
         ttk.Entry(params_frame, textvariable=self.ft_slow_ema, width=8).grid(row=0, column=3, padx=2)
-        
-        ttk.Label(params_frame, text="EMA Points Threshold:").grid(row=0, column=4, sticky="e", padx=2)
-        self.ft_ema_points_threshold = tk.StringVar(value="2")
-        ttk.Entry(params_frame, textvariable=self.ft_ema_points_threshold, width=8).grid(row=0, column=5, padx=2)
         
         # MACD Parameters
         ttk.Label(params_frame, text="MACD Fast:").grid(row=1, column=0, sticky="e", padx=2)
@@ -817,8 +808,7 @@ class UnifiedTradingGUI(tk.Tk):
                 "use_atr": self.ft_use_atr.get(),
                 "fast_ema": int(self.ft_fast_ema.get()),
                 "slow_ema": int(self.ft_slow_ema.get()),
-                "ema_points_threshold": int(self.ft_ema_points_threshold.get()),
-                "macd_fast": int(self.ft_macd_fast.get()),
+               "macd_fast": int(self.ft_macd_fast.get()),
                 "macd_slow": int(self.ft_macd_slow.get()),
                 "macd_signal": int(self.ft_macd_signal.get()),
                 "rsi_length": int(self.ft_rsi_length.get()),

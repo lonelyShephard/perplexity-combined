@@ -1,9 +1,8 @@
 import itertools, os, pandas as pd
 from copy import deepcopy
-from core.researchStrategy import ModularIntradayStrategy
-
-# Correct imports - only import from backtest_runner.py
-from backtest.backtest_runner import run_backtest, get_strategy, load_and_normalize_data
+import logging
+from datetime import datetime
+from backtest.backtest_runner import run_backtest
 
 # --- Parameter grid
 SL_POINTS = [7, 12]
@@ -47,6 +46,7 @@ base_cfg = {
 
 def make_cfg(base, sl, ta, td):
     cfg = deepcopy(base)
+    # ✅ Add the missing base_sl_points parameter that PositionManager needs
     cfg['risk']['base_sl_points'] = sl
     cfg['risk']['trail_activation_points'] = ta
     cfg['risk']['trail_distance_points'] = td
@@ -54,13 +54,19 @@ def make_cfg(base, sl, ta, td):
 
 def main(data_file, output_dir="matrix_results"):
     os.makedirs(output_dir, exist_ok=True)
-    
-    # ✅ Use standardized data loading from backtest_runner
-    df_normalized, quality_report = load_and_normalize_data(data_file, process_as_ticks=True)
-    
-    # You can now also log quality metrics:
-    print(f"📊 Data loaded: {len(df_normalized)} rows")
-    print(f"📊 Data quality metrics: {getattr(quality_report, 'issues_found', {})}")
+
+    # Configure logging for the entire application run
+    log_filename = f"{output_dir}/matrix_run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_filename),
+            logging.StreamHandler()  # Also print all logs to the console
+        ]
+    )
+    logger = logging.getLogger(__name__)
+    logger.info(f"Matrix backtest started. Log file: {log_filename}")
     
     summary_rows = []
     for sl, ta, td in itertools.product(SL_POINTS, TA_POINTS, TD_POINTS):
@@ -68,10 +74,10 @@ def main(data_file, output_dir="matrix_results"):
         config = make_cfg(base_cfg, sl, ta, td)
         tag = f"SL{sl}_TA{ta}_TD{td}"
         
-        # ✅ Pass normalized data to avoid reloading
-        trades, perf = run_backtest(config, data_file, df_normalized=df_normalized)
+        # Pure orchestration - let backtest_runner handle all data processing
+        trades, perf = run_backtest(config, data_file)
         
-        # ✅ Aggregate results - pure orchestration
+        # Pure result aggregation
         trades.to_csv(f"{output_dir}/{tag}_trades.csv", index=False)
         perf["id"] = tag
         summary_rows.append(perf)
@@ -82,14 +88,15 @@ def main(data_file, output_dir="matrix_results"):
 if __name__ == "__main__":
     import sys
     # Use command line argument for data file if provided, otherwise use default
-    data_file = sys.argv[1] if len(sys.argv) > 1 else "sample_data.csv"
+    data_file = sys.argv[1] if len(sys.argv) > 1 else "sampleData.csv"
     main(data_file)
 
 
 """
 CONFIGURATION PARAMETER NAMING CONVENTION:
 - Uses 'config' for configuration dictionaries (was 'cfg')
-- Calls run_backtest(config, data_file, df_normalized=df_normalized)
+-- Calls run_backtest(config, data_file, df_normalized=df_normalized)
++- Calls run_backtest(config, data_file)
 - Uses make_config() function that returns 'config' objects
 
 INTERFACE COMPATIBILITY:
