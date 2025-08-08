@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 import logging
 import uuid
+from utils.config_helper import ConfigAccessor
 from utils.time_utils import now_ist
 
 logger = logging.getLogger(__name__)
@@ -123,23 +124,24 @@ class Trade:
 class PositionManager:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
-        self.initial_capital = config.get('initial_capital', 100000)
+        self.config_accessor = ConfigAccessor(config)
+        self.initial_capital = self.config_accessor.get_capital_param('initial_capital', 100000)
         self.current_capital = self.initial_capital
         self.reserved_margin = 0.0
-        self.risk_per_trade_percent = config.get('risk_per_trade_percent', 1.0)
-        self.max_position_value_percent = config.get('max_position_value_percent', 95)
-        self.base_sl_points = config.get('base_sl_points', 15)
-        self.tp_points = config.get('tp_points', [10, 25, 50, 100])
-        self.tp_percentages = config.get('tp_percents', [0.25, 0.25, 0.25, 0.25])
-        self.use_trailing_stop = config.get('use_trail_stop', True)
-        self.trailing_activation_points = config.get('trail_activation_points', 25)
-        self.trailing_distance_points = config.get('trail_distance_points', 10)
-        self.commission_percent = config.get('commission_percent', 0.03)
-        self.commission_per_trade = config.get('commission_per_trade', 0.0)
-        self.stt_percent = config.get('stt_percent', 0.025)
-        self.exchange_charges_percent = config.get('exchange_charges_percent', 0.0019)
-        self.gst_percent = config.get('gst_percent', 18.0)
-        self.slippage_points = config.get('slippage_points', 1)
+        self.risk_per_trade_percent = self.config_accessor.get_risk_param('risk_per_trade_percent', 1.0)
+        self.max_position_value_percent = self.config_accessor.get_risk_param('max_position_value_percent', 95)
+        self.base_sl_points = self.config_accessor.get_risk_param('base_sl_points', 15)
+        self.tp_points = self.config_accessor.get_risk_param('tp_points', [10, 25, 50, 100])
+        self.tp_percentages = self.config_accessor.get_risk_param('tp_percents', [0.25, 0.25, 0.25, 0.25])
+        self.use_trailing_stop = self.config_accessor.get_risk_param('use_trail_stop', True)
+        self.trailing_activation_points = self.config_accessor.get_risk_param('trail_activation_points', 25)
+        self.trailing_distance_points = self.config_accessor.get_risk_param('trail_distance_points', 10)
+        self.commission_percent = self.config_accessor.get_risk_param('commission_percent', 0.03)
+        self.commission_per_trade = self.config_accessor.get_risk_param('commission_per_trade', 0.0)
+        self.stt_percent = self.config_accessor.get_risk_param('stt_percent', 0.025)
+        self.exchange_charges_percent = self.config_accessor.get_risk_param('exchange_charges_percent', 0.0019)
+        self.gst_percent = self.config_accessor.get_risk_param('gst_percent', 18.0)
+        self.slippage_points = self.config_accessor.get_risk_param('slippage_points', 1)
         self.positions: Dict[str, Position] = {}
         self.completed_trades: List[Trade] = []
         self.daily_pnl = 0.0
@@ -466,7 +468,7 @@ class PositionManager:
         self.close_position_full(position_id, price, timestamp, reason)
 
     def can_enter_position(self) -> bool:
-        return len(self.positions) < self.config.get('max_positions_per_day', 10)
+        return len(self.positions) < self.config_accessor.get_strategy_param('max_positions_per_day', 10)
 
     def calculate_position_size_gui_driven(self, entry_price: float, stop_loss_price: float, 
                                      user_capital: float, user_risk_pct: float, 

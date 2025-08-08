@@ -407,6 +407,8 @@ class UnifiedTradingGUI(tk.Tk):
             }
         }
         
+        logger.info(f"Config being sent: {gui_config['strategy']}")
+        
         self._backtest_thread = threading.Thread(target=self._bt_worker, args=(gui_config, data_path))
         self._backtest_thread.start()
 
@@ -1080,6 +1082,43 @@ class UnifiedTradingGUI(tk.Tk):
         
         # Trigger capital recalculation
         self._update_capital_calculations()
+
+    def start_backtest(self):
+        """Start backtesting with current configuration"""
+        try:
+            # Validate the configuration before starting backtest
+            self._validate_indicator_configuration()
+            
+             # Get config from GUI elements
+            config = self._get_backtest_config()
+            
+             # Start backtest process...
+        except Exception as e:
+            messagebox.showerror("Backtest Error", str(e))
+            
+    def _validate_indicator_configuration(self):
+        """Ensure at least one indicator is enabled and configuration is valid"""
+        enabled_indicators = [
+            self.bt_use_ema_crossover.get(),
+            self.bt_use_macd.get(),
+            self.bt_use_vwap.get(),
+            self.bt_use_rsi_filter.get(),
+            self.bt_use_bb.get(),
+            self.bt_use_htf_trend.get()
+        ]
+        
+        if not any(enabled_indicators):
+            raise ValueError("At least one indicator must be enabled")
+            
+        # Validate that required data exists for enabled indicators
+        data_file = self.bt_data_path.get()
+        if self.bt_use_vwap.get():
+            # Check if data file has volume data for VWAP calculation
+            try:
+                self._validate_data_columns(data_file, ['volume', 'high', 'low'])
+            except Exception:
+                raise ValueError("Selected data file doesn't have required columns for VWAP calculation")
+        logger.info(f"EMA: {self.bt_use_ema_crossover.get()}, MACD: {self.bt_use_macd.get()}, VWAP: {self.bt_use_vwap.get()}, HTF: {self.bt_use_htf_trend.get()}, ATR: {self.bt_use_atr.get()}")
 
 if __name__ == "__main__":
     app = UnifiedTradingGUI()

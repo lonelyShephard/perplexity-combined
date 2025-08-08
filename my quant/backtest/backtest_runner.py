@@ -29,7 +29,9 @@ import inspect
 from core.position_manager import PositionManager
 from utils.simple_loader import load_data_simple
 from utils.time_utils import normalize_datetime_to_ist, now_ist, ensure_tz_aware, is_time_to_exit, is_trading_session
+from utils.config_helper import ConfigAccessor
 import logging
+from core.indicators import calculate_all_indicators
 
 logger = logging.getLogger(__name__)
 
@@ -60,29 +62,15 @@ def get_strategy(config: dict):
         strat_mod = importlib.import_module("core.researchStrategy")
     else:
         strat_mod = importlib.import_module("core.liveStrategy")
-
+     
     ind_mod = importlib.import_module("core.indicators")
-
-    # Flatten strategy section into root config
-    # This ensures strategy classes can find their parameters
-    strategy_section = config.get('strategy', {})
-
-    # Create flattened config with strategy params at root level
-    flattened_config = dict(config)  # Start with original config
-    flattened_config.update(strategy_section)  # Add strategy params to root
-
-    # Log the fix for verification
-    logger.info("CONFIG FIX: Flattened strategy parameters to root level")
-    logger.info(f"Strategy parameters found: {list(strategy_section.keys())}")
-
-    # Debug parameters for verification
-    debug_params = ['use_macd', 'use_htf_trend', 'use_atr', 'use_ema_crossover', 'use_vwap']
-    logger.info("VERIFICATION: Parameter values after flattening:")
-    for param in debug_params:
-        value = flattened_config.get(param, 'NOT_FOUND')
-        logger.info(f"  {param}: {value}")
-
-    return strat_mod.ModularIntradayStrategy(flattened_config, ind_mod)
+    
+    # FIXED: Keep nested structure, no more flattening
+    logger.info("NESTED CONFIG: Using consistent nested configuration structure")
+    logger.info(f"Strategy parameters found: {list(config.get('strategy', {}).keys())}")
+     
+    # Pass nested config directly to strategy
+    return strat_mod.ModularIntradayStrategy(config, ind_mod)
 
 def run_backtest(config: Dict[str, Any], data_file: str,
                  df_normalized=None, skip_indicator_calculation=False):
@@ -106,34 +94,37 @@ def run_backtest(config: Dict[str, Any], data_file: str,
     if 'symbol' not in instrument_params:
         instrument_params['symbol'] = 'DEFAULT_SYMBOL'
         logger.warning(f"Instrument symbol not found in config. Using default: '{instrument_params['symbol']}'")
-    
-    # Initialize components
+     
+    # FIXED: Maintain consistent nested structure throughout
+    logger.info("=== NESTED CONFIG STRUCTURE MAINTAINED ===")
+    for section, params in config.items():
+        if isinstance(params, dict):
+            logger.info(f"Section '{section}': {len(params)} parameters")
+     
+    # Ensure session parameters are consistent
+    session_params = config.get("session", {})
+    if "intraday_end_min" not in session_params:
+        session_params["intraday_end_min"] = 30  # Consistent with NSE close time
+    if "exit_before_close" not in session_params:
+        session_params["exit_before_close"] = 20  # Default value
+    if "timezone" not in session_params:
+        session_params["timezone"] = "Asia/Kolkata"
+
+    # Initialize components with nested config
     strategy = get_strategy(config)
     
-    # Create a consolidated config dictionary
-    position_config = {
-        **strategy_params,
-        **risk_params, 
-        **instrument_params,
-        'initial_capital': capital,
-        'session': session_params
-    }
-
-    # ✅ DIAGNOSTIC: Log the actual config being passed to PositionManager
-    logger.info("=== POSITION MANAGER CONFIG DIAGNOSTIC ===")
-    for key, value in position_config.items():
-        logger.info(f"  {key}: {value}")
+    # FIXED: Pass nested config directly to PositionManager
+    logger.info("=== NESTED CONFIG PASSED TO POSITION MANAGER ===")
+    logger.info(f"Config sections: {list(config.keys())}")
     
-    # ✅ Check critical parameters specifically
-    critical_params = ['base_sl_points', 'tp_points', 'tp_percents', 'risk_per_trade_percent', 'commission_percent']
-    missing_params = [p for p in critical_params if p not in position_config]
-    if missing_params:
-        logger.warning(f"❌ MISSING critical PositionManager parameters: {missing_params}")
-    else:
-        logger.info("All critical PositionManager parameters present")
-
-    # Initialize with a single dictionary argument
-    position_manager = PositionManager(position_config)
+    # Validate critical sections exist
+    required_sections = ['strategy', 'risk', 'capital', 'instrument', 'session']
+    missing_sections = [s for s in required_sections if s not in config]
+    if missing_sections:
+        logger.warning(f"❌ MISSING config sections: {missing_sections}")
+     
+    # Initialize PositionManager with nested config
+    position_manager = PositionManager(config)
     
     # Skip data loading if df_normalized is provided
     if df_normalized is None:
@@ -569,139 +560,71 @@ def process_indicators_sequential(df_normalized: pd.DataFrame, strategy, chunk_s
         logger.info(f"Small dataset ({total_rows} rows), processing without chunking")
         return strategy.calculate_indicators(df_normalized)
 
-    # Import incremental indicators (already available from indicators.py)
-    try:
-        from core.indicators import IncrementalEMA, IncrementalMACD, IncrementalVWAP, IncrementalATR
-    except ImportError:
-        logger.warning("Incremental indicators not available, falling back to full processing")
-        return strategy.calculate_indicators(df_normalized)
-
-    # Initialize indicator state trackers for continuity across chunks  
-    indicator_states = {}
-    config = strategy.config
-
-    if config.get('use_ema_crossover', False):
-        indicator_states['fast_ema'] = IncrementalEMA(period=config.get('fast_ema', 9))
-        indicator_states['slow_ema'] = IncrementalEMA(period=config.get('slow_ema', 21))
-
-    if config.get('use_macd', False):
-        indicator_states['macd'] = IncrementalMACD(
-            fast=config.get('macd_fast', 12),
-            slow=config.get('macd_slow', 26), 
-            signal=config.get('macd_signal', 9)
-        )
-
-    if config.get('use_vwap', False):
-        indicator_states['vwap'] = IncrementalVWAP()
-
-    if config.get('use_atr', False):
-        indicator_states['atr'] = IncrementalATR(period=config.get('atr_len', 14))
-
     # Setup diagnostics
     logger.info("=== CHUNK PROCESSING DIAGNOSTICS ===")
     logger.info(f"Input dataset: {len(df_normalized)} rows")
     logger.info(f"Chunk size: {chunk_size}")
     logger.info(f"Number of chunks: {(len(df_normalized) + chunk_size - 1) // chunk_size}")
     
-    # Process in sequential, non-overlapping chunks
     processed_chunks = []
     chunk_summaries = []
-
-    for start_idx in range(0, total_rows, chunk_size):
+    
+    num_chunks = (total_rows + chunk_size - 1) // chunk_size
+    for chunk_num in range(1, num_chunks + 1):
+        start_idx = (chunk_num - 1) * chunk_size
         end_idx = min(start_idx + chunk_size, total_rows)
-        chunk_num = (start_idx // chunk_size) + 1
-        
-        logger.info(f"Processing chunk {chunk_num}: rows {start_idx}-{end_idx}")
-
-        # Get current chunk
         chunk_df = df_normalized.iloc[start_idx:end_idx].copy()
 
+        logger.info(f"Processing chunk {chunk_num}: rows {start_idx}-{end_idx}")
+
         try:
-            # Process each row in the chunk sequentially to maintain state
-            for idx, row in chunk_df.iterrows():
+            # Pass nested config directly to calculate_all_indicators
+            chunk_with_indicators = calculate_all_indicators(chunk_df, strategy.config)
 
-                # EMA indicators
-                if 'fast_ema' in indicator_states:
-                    chunk_df.loc[idx, 'fast_ema'] = indicator_states['fast_ema'].update(row['close'])
-                    chunk_df.loc[idx, 'slow_ema'] = indicator_states['slow_ema'].update(row['close'])
-
-                # MACD indicator  
-                if 'macd' in indicator_states:
-                    macd_val, signal_val, hist_val = indicator_states['macd'].update(row['close'])
-                    chunk_df.loc[idx, 'macd'] = macd_val
-                    chunk_df.loc[idx, 'macd_signal'] = signal_val  
-                    chunk_df.loc[idx, 'histogram'] = hist_val
-
-                # VWAP indicator
-                if 'vwap' in indicator_states:
-                    vwap_val = indicator_states['vwap'].update(
-                        price=row['close'],
-                        volume=row['volume'],
-                        high=row.get('high'),
-                        low=row.get('low'),
-                        close=row.get('close')
-                    )
-                    chunk_df.loc[idx, 'vwap'] = vwap_val
-
-                # ATR indicator
-                if 'atr' in indicator_states:
-                    atr_val = indicator_states['atr'].update(
-                        high=row['high'],
-                        low=row['low'], 
-                        close=row['close']
-                    )
-                    chunk_df.loc[idx, 'atr'] = atr_val
-
-            # Add signal calculations based on computed indicators
-            add_indicator_signals_to_chunk(chunk_df, config)
-            
-            # Collect diagnostic info for this chunk
             chunk_summary = {
                 'chunk': chunk_num,
-                'rows': len(chunk_df),
-                'time_start': chunk_df.index[0],
-                'time_end': chunk_df.index[-1],
+                'rows': len(chunk_with_indicators),
+                'time_start': chunk_with_indicators.index[0],
+                'time_end': chunk_with_indicators.index[-1],
                 'ema_crossovers': 0,
                 'vwap_bullish': 0
             }
-            
-            if 'fast_ema' in chunk_df.columns and 'slow_ema' in chunk_df.columns:
-                ema_cross = (chunk_df['fast_ema'] > chunk_df['slow_ema']).sum()
+
+            if 'fast_ema' in chunk_with_indicators.columns and 'slow_ema' in chunk_with_indicators.columns:
+                ema_cross = (chunk_with_indicators['fast_ema'] > chunk_with_indicators['slow_ema']).sum()
                 chunk_summary['ema_crossovers'] = ema_cross
-                
-            if 'vwap' in chunk_df.columns:
-                vwap_bull = (chunk_df['close'] > chunk_df['vwap']).sum()
+
+            if 'vwap' in chunk_with_indicators.columns:
+                vwap_bull = (chunk_with_indicators['close'] > chunk_with_indicators['vwap']).sum()
                 chunk_summary['vwap_bullish'] = vwap_bull
-                
+
             chunk_summaries.append(chunk_summary)
-            processed_chunks.append(chunk_df)
-            
+            processed_chunks.append(chunk_with_indicators)
+
             logger.info(f"Chunk {chunk_num} summary: {chunk_summary}")
 
         except Exception as e:
             logger.error(f"Error processing chunk {start_idx}-{end_idx}: {e}")
-            # Fallback: use original data for this chunk
-            processed_chunks.append(chunk_df)
+            # Use strategy.calculate_indicators as fallback instead of raw data
+            fallback_indicators = strategy.calculate_indicators(chunk_df)
+            processed_chunks.append(fallback_indicators)
 
-    # Combine all processed chunks - no complex index manipulation needed
     df_with_indicators = pd.concat(processed_chunks, axis=0, ignore_index=False)
 
-    # Verify integrity
     if len(df_with_indicators) != total_rows:
         logger.error(f"Data integrity check failed: expected {total_rows}, got {len(df_with_indicators)}")
-        # Fallback to full processing
         logger.warning("Falling back to full dataset processing")
         return strategy.calculate_indicators(df_normalized)
 
-    # Final verification that expected indicators are present
+    strategy_config = strategy.config.get('strategy', {})
     expected_indicators = []
-    if config.get('use_ema_crossover', False):
+    if strategy_config.get('use_ema_crossover', False):
         expected_indicators.extend(['fast_ema', 'slow_ema'])
-    if config.get('use_macd', False):
+    if strategy_config.get('use_macd', False):
         expected_indicators.extend(['macd', 'macd_signal', 'histogram'])
-    if config.get('use_vwap', False):
+    if strategy_config.get('use_vwap', False):
         expected_indicators.append('vwap')
-    if config.get('use_atr', False):
+    if strategy_config.get('use_atr', False):
         expected_indicators.append('atr')
 
     missing_indicators = [ind for ind in expected_indicators if ind not in df_with_indicators.columns]
@@ -711,16 +634,12 @@ def process_indicators_sequential(df_normalized: pd.DataFrame, strategy, chunk_s
         return strategy.calculate_indicators(df_normalized)
 
     logger.info(f"Sequential chunk processing completed successfully: {len(df_with_indicators)} rows with indicators")
-    
-    # Final summary
     logger.info("=== CHUNK PROCESSING SUMMARY ===")
     total_ema_signals = sum(c['ema_crossovers'] for c in chunk_summaries)
     total_vwap_signals = sum(c['vwap_bullish'] for c in chunk_summaries)
-    
     logger.info(f"Total EMA bullish signals: {total_ema_signals}")
     logger.info(f"Total VWAP bullish signals: {total_vwap_signals}")
     logger.info(f"Both conditions met estimate: {min(total_ema_signals, total_vwap_signals)}")
-    
     return df_with_indicators
 
 if __name__ == "__main__":

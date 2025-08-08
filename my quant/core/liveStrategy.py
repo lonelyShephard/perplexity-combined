@@ -80,7 +80,7 @@ class ModularIntradayStrategy:
         if self.config.get('use_ema_crossover', False):
             pass_ema = (
                 row.get('fast_ema', None) is not None and
-                row.get('slow_ema', None) is not None and
+                row.get('slow_ema',ś None) is not None and
                 row['fast_ema'] > row['slow_ema']
             )
         # --- VWAP ---

@@ -25,6 +25,7 @@ import logging
 from core.indicators import calculate_all_indicators
 from core.indicators import IncrementalEMA, IncrementalMACD, IncrementalVWAP, IncrementalATR
 from utils.time_utils import now_ist, normalize_datetime_to_ist, is_time_to_exit, ensure_tz_aware
+from utils.config_helper import ConfigAccessor
 
 
 logger = logging.getLogger(__name__)
@@ -53,6 +54,14 @@ class ModularIntradayStrategy:
             config: Strategy parameters from config
         """
         self.config = config
+        
+        self.config_accessor = ConfigAccessor(config)
+        # Validate configuration structure
+        validation = self.config_accessor.validate_required_params()
+        if not validation['valid']:
+            logger.error(f"Configuration validation failed: {validation['errors']}")
+            raise ValueError(f"Invalid configuration: ṇ{validation['errors']}")
+        
         self.indicators = indicators_module  # Store but don't necessarily use
         self.name = "Modular Intraday Long-Only Strategy"
         self.version = "3.0"
@@ -83,35 +92,35 @@ class ModularIntradayStrategy:
         self.no_trade_end_minutes = config.get('no_trade_end_minutes', 30)
         
         # Indicator parameters
-        self.use_ema_crossover = config.get('use_ema_crossover', True)
-        self.use_macd = config.get('use_macd', True)
-        self.use_vwap = config.get('use_vwap', True)
-        self.use_rsi_filter = config.get('use_rsi_filter', False)
-        self.use_htf_trend = config.get('use_htf_trend', True)  # Now optional!
-        self.use_bollinger_bands = config.get('use_bollinger_bands', False)
-        self.use_stochastic = config.get('use_stochastic', False)
-        self.use_atr = config.get('use_atr', True)
+        self.use_ema_crossover = self.config_accessor.get_strategy_param('use_ema_crossover', True)
+        self.use_macd = self.config_accessor.get_strategy_param('use_macd', True)
+        self.use_vwap = self.config_accessor.get_strategy_param('use_vwap', True)
+        self.use_rsi_filter = self.config_accessor.get_strategy_param('use_rsi_filter', False)
+        self.use_htf_trend = self.config_accessor.get_strategy_param('use_htf_trend', True)  # Now optional!
+        self.use_bollinger_bands = self.config_accessor.get_strategy_param('use_bollinger_bands', False)
+        self.use_stochastic = self.config_accessor.get_strategy_param('use_stochastic', False)
+        self.use_atr = self.config_accessor.get_strategy_param('use_atr', True)
         
         # EMA parameters
-        self.fast_ema = config.get('fast_ema', 9)
-        self.slow_ema = config.get('slow_ema', 21)
+        self.fast_ema = self.config_accessor.get_strategy_param('fast_ema', 9)
+        self.slow_ema = self.config_accessor.get_strategy_param('slow_ema', 21)
  
         # MACD parameters
-        self.macd_fast = config.get('macd_fast', 12)
-        self.macd_slow = config.get('macd_slow', 26)
-        self.macd_signal = config.get('macd_signal', 9)
+        self.macd_fast = self.config_accessor.get_strategy_param('macd_fast', 12)
+        self.macd_slow = self.config_accessor.get_strategy_param('macd_slow', 26)
+        self.macd_signal = self.config_accessor.get_strategy_param('macd_signal', 9)
         
         # RSI parameters
-        self.rsi_length = config.get('rsi_length', 14)
-        self.rsi_overbought = config.get('rsi_overbought', 70)
-        self.rsi_oversold = config.get('rsi_oversold', 30)
+        self.rsi_length = self.config_accessor.get_strategy_param('rsi_length', 14)
+        self.rsi_overbought = self.config_accessor.get_strategy_param('rsi_overbought', 70)
+        self.rsi_oversold = self.config_accessor.get_strategy_param('rsi_oversold', 30)
         
         # HTF parameters
-        self.htf_period = config.get('htf_period', 20)
+        self.htf_period = self.config_accessor.get_strategy_param('htf_period', 20)
         
         # Risk management
-        self.base_sl_points = config.get('base_sl_points', 15)
-        self.risk_per_trade_percent = config.get('risk_per_trade_percent', 1.0)
+        self.base_sl_points = self.config_accessor.get_risk_param('base_sl_points', 15)
+        self.risk_per_trade_percent = self.config_accessor.get_risk_param('risk_per_trade_percent', 1.0)
         
         # Daily tracking
         self.daily_stats = {
